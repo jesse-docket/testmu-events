@@ -1,0 +1,1292 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TestMu AI — Events</title>
+<meta name="description" content="Conferences, replays and certifications for AI-native quality engineering. Register for Testμ Conf '27, browse the '26 archive, or pick a learning path.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="TestMu AI — Events">
+<meta property="og:description" content="Conferences, replays and certifications for AI-native quality engineering.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23131313'/%3E%3Ctext x='16' y='23' font-family='monospace' font-size='19' font-weight='700' fill='%23FF4F4A' text-anchor='middle'%3E%CE%BC%3C/text%3E%3C/svg%3E">
+
+<style>
+/* ============================================================
+   TestMu AI — Event Concierge campaign site
+   Visual system sampled from the Testμ Conf '27 page:
+     ivory paper #EBE9E0 / field #E2E1D6 / nav #F3F2EE
+     dark library browns #24160F → #3A2418, pill #322720
+     display cream #FFFFDE, accent coral #FF4F4A
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --ink: #131313;
+  --ink-2: #181818;
+  --wood-deep: #1E120C;
+  --wood: #2D1D17;
+  --wood-warm: #3A2418;
+  --wood-lit: #5B3A1E;
+  --pill: #322720;
+  --paper: #EBE9E0;
+  --paper-2: #E2E1D6;
+  --paper-3: #D8D6CA;
+  --nav: #F3F2EE;
+  --cream: #FFFFDE;
+  --cream-dim: rgba(255,255,222,.72);
+  --coral: #FF4F4A;
+  --coral-2: #FF5A54;
+  --coral-deep: #C9352F;
+  --rule: rgba(19,19,19,.14);
+  --rule-light: rgba(255,255,222,.18);
+
+  --display: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --maxw: 1320px;
+  --gutter: clamp(18px, 4vw, 56px);
+  --radius: 2px;
+}
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--nav);
+  color: var(--ink);
+  font-family: var(--display);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+[hidden] { display: none !important; }
+
+.wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+
+.skip {
+  position: absolute; left: -9999px; top: 0; z-index: 999;
+  background: var(--ink); color: var(--cream); padding: 12px 18px;
+  font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
+}
+.skip:focus { left: 8px; top: 8px; }
+
+:where(a, button, input, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--coral);
+  outline-offset: 3px;
+}
+
+/* ---------- eyebrow / label type ---------- */
+.label {
+  font-family: var(--mono);
+  font-size: clamp(10px, .78vw, 12px);
+  font-weight: 500;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+/* ================= HEADER ================= */
+.masthead {
+  position: sticky; top: 0; z-index: 60;
+  background: var(--nav);
+  border-bottom: 1px solid rgba(19,19,19,.10);
+}
+.masthead-in {
+  display: flex; align-items: center; gap: clamp(14px, 2.4vw, 34px);
+  height: 72px;
+}
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; flex: 0 0 auto; }
+.brand-mark { width: 22px; height: 24px; flex: 0 0 auto; }
+.brand-text { display: flex; flex-direction: column; line-height: 1; }
+.brand-name { font-size: 21px; font-weight: 700; letter-spacing: -.02em; }
+.brand-sub {
+  font-family: var(--mono); font-size: 8.5px; letter-spacing: .06em;
+  text-transform: uppercase; color: rgba(19,19,19,.55); margin-top: 4px;
+}
+.nav { display: flex; align-items: center; gap: clamp(12px, 1.8vw, 26px); margin-left: 6px; }
+.nav a {
+  text-decoration: none; font-size: 15px; font-weight: 500;
+  color: var(--ink); opacity: .9; white-space: nowrap;
+}
+.nav a:hover { opacity: 1; }
+.masthead-cta { margin-left: auto; display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  font-family: var(--display); font-weight: 600; font-size: 14px;
+  padding: 11px 20px; border-radius: var(--radius);
+  border: 1px solid transparent; cursor: pointer;
+  text-decoration: none; white-space: nowrap;
+  transition: background .16s ease, color .16s ease, transform .12s ease, border-color .16s ease;
+}
+.btn:active { transform: translateY(1px); }
+.btn-ghost { background: transparent; border-color: rgba(19,19,19,.28); color: var(--ink); }
+.btn-ghost:hover { border-color: var(--ink); }
+.btn-ink { background: var(--ink); color: #fff; }
+.btn-ink:hover { background: #000; }
+
+/* ================= HERO ================= */
+.hero {
+  position: relative;
+  background: var(--wood-deep);
+  color: var(--cream);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* procedural "dark library" backdrop — swap for the licensed TestMu hero art
+   by setting .hero-art { background-image: url('assets/hero-library.jpg') } */
+.hero-art { position: absolute; inset: 0; z-index: -3; background-size: cover; background-position: center; }
+.hero-art::before {
+  /* shelves of book spines */
+  content: ""; position: absolute; inset: -2% -2% 26% -2%;
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(255,225,180,.10) 0 3px, rgba(0,0,0,.34) 3px 7px,
+      rgba(160,90,40,.16) 7px 12px, rgba(0,0,0,.26) 12px 15px,
+      rgba(210,160,95,.09) 15px 19px, rgba(0,0,0,.40) 19px 25px),
+    repeating-linear-gradient(0deg,
+      rgba(0,0,0,.62) 0 8px, rgba(0,0,0,0) 8px 92px, rgba(0,0,0,.55) 92px 104px);
+  filter: blur(.4px);
+  opacity: .78;
+}
+.hero-art::after {
+  /* warm window light from the right + deep vignette */
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(90% 70% at 88% 18%, rgba(255,196,110,.40), rgba(255,150,60,.10) 42%, transparent 70%),
+    radial-gradient(70% 55% at 26% 42%, rgba(120,66,30,.40), transparent 68%),
+    linear-gradient(180deg, rgba(30,18,12,.55) 0%, rgba(30,18,12,.18) 34%, rgba(26,15,10,.72) 78%, #1A0F0A 100%),
+    linear-gradient(90deg, rgba(12,7,4,.80) 0%, rgba(12,7,4,.26) 38%, transparent 62%);
+}
+.hero-desk {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 26%; z-index: -2;
+  background:
+    linear-gradient(180deg, #4A2C18 0%, #35200F 40%, #24150B 100%);
+  box-shadow: inset 0 14px 34px rgba(0,0,0,.55);
+}
+.hero-grain {
+  position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .30; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+
+.hero-in {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr);
+  gap: clamp(28px, 4vw, 64px);
+  align-items: start;
+  padding-block: clamp(44px, 7vw, 96px) clamp(56px, 8vw, 110px);
+}
+
+.hero-eyebrow { color: var(--coral); display: flex; align-items: center; gap: 10px; margin-bottom: clamp(18px, 2.4vw, 30px); }
+.hero-eyebrow::before { content: ""; width: 26px; height: 1px; background: var(--coral); }
+
+.hero-title {
+  font-size: clamp(46px, 8.4vw, 116px);
+  line-height: .92;
+  letter-spacing: -.035em;
+  font-weight: 700;
+  color: var(--cream);
+  margin: 0;
+  text-wrap: balance;
+}
+.hero-title .accent { color: var(--coral); }
+.hero-title .star {
+  display: inline-block; width: .74em; height: .74em; vertical-align: -.06em;
+  margin-inline: -.02em;
+}
+
+.hero-sub {
+  font-family: var(--mono);
+  font-size: clamp(13px, 1.35vw, 17px);
+  font-weight: 400;
+  letter-spacing: .05em;
+  line-height: 1.55;
+  text-transform: uppercase;
+  color: var(--cream);
+  margin: clamp(20px, 2.6vw, 32px) 0 0;
+  max-width: 30ch;
+}
+
+.hero-lede {
+  font-size: clamp(15px, 1.25vw, 17px);
+  line-height: 1.65;
+  color: var(--cream-dim);
+  max-width: 52ch;
+  margin: 18px 0 0;
+}
+
+/* fact pill */
+.factpill {
+  display: inline-flex; align-items: stretch; gap: 0;
+  margin-top: clamp(26px, 3.4vw, 40px);
+  border: 1px solid rgba(255,255,222,.34);
+  border-radius: 999px;
+  background: rgba(50,39,32,.62);
+  backdrop-filter: blur(3px);
+  overflow: hidden;
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+.factpill-star { display: grid; place-items: center; padding-inline: 16px; flex: 0 0 auto; }
+.factpill-star svg { width: 26px; height: 26px; }
+.fact { padding: 14px 22px; border-left: 1px solid rgba(255,255,222,.16); min-width: 0; }
+.fact:first-of-type { border-left: 0; }
+.fact dt { color: rgba(255,255,222,.6); margin: 0 0 5px; }
+.fact dd { margin: 0; font-family: var(--mono); font-size: clamp(14px, 1.35vw, 19px); font-weight: 700; letter-spacing: .02em; color: var(--cream); white-space: nowrap; }
+
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: clamp(26px, 3.2vw, 38px); }
+
+.btn-coral {
+  background: var(--coral); color: #1C1914; font-weight: 700;
+  font-family: var(--mono); font-size: 14px; letter-spacing: .06em; text-transform: uppercase;
+  padding: 16px 26px;
+  box-shadow: 5px 5px 0 rgba(0,0,0,.55);
+  border: 1px solid #1C1914;
+}
+.btn-coral:hover { background: var(--coral-2); }
+.btn-coral:active { transform: translate(2px, 2px); box-shadow: 3px 3px 0 rgba(0,0,0,.55); }
+
+.btn-outline-cream {
+  background: transparent; color: var(--cream);
+  border-color: rgba(255,255,222,.42);
+  font-family: var(--mono); font-size: 13px; letter-spacing: .06em; text-transform: uppercase;
+  padding: 16px 24px;
+}
+.btn-outline-cream:hover { border-color: var(--cream); background: rgba(255,255,222,.07); }
+
+/* ============ CONCIERGE (the paper card) ============ */
+.concierge {
+  position: relative;
+  background: var(--paper);
+  color: var(--ink);
+  padding: clamp(24px, 2.6vw, 38px);
+  box-shadow: 0 30px 70px rgba(0,0,0,.45);
+  border-radius: var(--radius);
+}
+/* taped corner, echoing the boarding-pass card */
+.concierge::before {
+  content: ""; position: absolute; top: -15px; right: -26px;
+  width: 108px; height: 44px; transform: rotate(-19deg);
+  background: linear-gradient(160deg, rgba(226,225,214,.95), rgba(168,166,156,.82) 46%, rgba(232,231,222,.92));
+  box-shadow: 0 3px 8px rgba(0,0,0,.30);
+  opacity: .92;
+}
+/* perforation ticks down the left edge */
+.concierge::after {
+  content: ""; position: absolute; left: 10px; top: 26px; bottom: 26px; width: 3px;
+  background: repeating-linear-gradient(180deg, var(--coral) 0 7px, transparent 7px 16px);
+  opacity: .85;
+}
+
+.concierge-head { padding-left: 18px; }
+.concierge-kicker { color: rgba(19,19,19,.55); }
+.concierge-title {
+  font-family: var(--mono);
+  font-size: clamp(19px, 1.8vw, 25px);
+  font-weight: 700; letter-spacing: .01em; text-transform: uppercase;
+  margin: 8px 0 0; line-height: 1.15;
+}
+.concierge-blurb { font-size: 14.5px; line-height: 1.6; color: rgba(19,19,19,.74); margin: 12px 0 0; }
+
+.concierge-opening {
+  margin: 20px 0 0 18px;
+  background: var(--paper-2);
+  border-left: 3px solid var(--coral);
+  padding: 15px 17px;
+  font-size: 15px; line-height: 1.55;
+}
+.concierge-opening .who {
+  display: block; margin-bottom: 6px;
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(19,19,19,.5);
+}
+
+.starters { list-style: none; margin: 16px 0 0 18px; padding: 0; display: grid; gap: 8px; }
+.starter {
+  width: 100%; text-align: left; cursor: pointer;
+  background: transparent; border: 1px solid rgba(19,19,19,.24);
+  border-radius: var(--radius);
+  padding: 13px 15px; font-family: var(--display); font-size: 14.5px; color: var(--ink);
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  transition: background .14s ease, border-color .14s ease;
+}
+.starter:hover { background: var(--paper-2); border-color: var(--ink); }
+.starter .chev { color: var(--coral); font-family: var(--mono); flex: 0 0 auto; }
+
+.concierge-foot {
+  margin: 20px 0 0 18px; padding-top: 16px; border-top: 1px dashed rgba(19,19,19,.22);
+  display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+}
+.concierge-note { font-family: var(--mono); font-size: 10.5px; letter-spacing: .04em; color: rgba(19,19,19,.5); max-width: 30ch; line-height: 1.5; }
+
+/* ================= SECTIONS ================= */
+.section { padding-block: clamp(56px, 7vw, 100px); }
+.section-paper { background: var(--nav); }
+.section-ivory { background: var(--paper); }
+
+.section-head { max-width: 62ch; margin-bottom: clamp(28px, 3.4vw, 44px); }
+.section-kicker { color: var(--coral-deep); display: flex; align-items: center; gap: 10px; }
+.section-kicker::before { content: ""; width: 22px; height: 1px; background: currentColor; }
+.section-title {
+  font-family: var(--mono);
+  font-size: clamp(24px, 3vw, 38px); font-weight: 700;
+  letter-spacing: -.01em; text-transform: uppercase;
+  margin: 12px 0 0; line-height: 1.12;
+}
+.section-lede { font-size: 16px; line-height: 1.65; color: rgba(19,19,19,.7); margin: 12px 0 0; }
+
+/* resource cards */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(248px, 1fr)); gap: 18px; }
+.card {
+  display: flex; flex-direction: column; gap: 10px;
+  background: #fff; border: 1px solid var(--rule); border-radius: var(--radius);
+  padding: 24px 22px 22px; text-decoration: none; color: var(--ink);
+  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+}
+.section-ivory .card { background: #fff; }
+.card:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(19,19,19,.10); border-color: rgba(19,19,19,.3); }
+.card-tag { color: var(--coral-deep); }
+.card-title { font-size: 18px; font-weight: 600; letter-spacing: -.01em; margin: 0; line-height: 1.3; }
+.card-desc { font-size: 14.5px; line-height: 1.55; color: rgba(19,19,19,.68); margin: 0; }
+.card-go { margin-top: auto; padding-top: 12px; font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+.card-go::after { content: "→"; color: var(--coral); }
+
+/* FAQ */
+.faq { max-width: 860px; }
+.faq-item { border-top: 1px solid var(--rule); }
+.faq-item:last-child { border-bottom: 1px solid var(--rule); }
+.faq-q {
+  width: 100%; background: none; border: 0; cursor: pointer;
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 20px;
+  padding: 22px 4px; text-align: left;
+  font-family: var(--display); font-size: clamp(16px, 1.5vw, 19px); font-weight: 600; color: var(--ink);
+  line-height: 1.4;
+}
+.faq-q .mark { flex: 0 0 auto; font-family: var(--mono); font-size: 20px; color: var(--coral); line-height: 1; transition: transform .2s ease; }
+.faq-q[aria-expanded="true"] .mark { transform: rotate(45deg); }
+.faq-a { padding: 0 4px 24px; max-width: 74ch; font-size: 15.5px; line-height: 1.68; color: rgba(19,19,19,.74); }
+.faq-a p { margin: 0 0 12px; }
+.faq-a p:last-child { margin-bottom: 0; }
+
+/* ================= FOOTER ================= */
+.foot { background: var(--ink); color: rgba(255,255,222,.72); padding-block: clamp(40px, 5vw, 64px); }
+.foot-in { display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start; justify-content: space-between; }
+.foot .brand-name { color: var(--cream); }
+.foot .brand-sub { color: rgba(255,255,222,.45); }
+.foot-links { display: flex; flex-wrap: wrap; gap: 10px 28px; }
+.foot-links a { font-family: var(--mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; text-decoration: none; color: rgba(255,255,222,.72); }
+.foot-links a:hover { color: var(--cream); }
+.foot-fine { width: 100%; border-top: 1px solid rgba(255,255,222,.14); margin-top: 30px; padding-top: 20px; font-family: var(--mono); font-size: 11px; letter-spacing: .04em; color: rgba(255,255,222,.42); }
+
+/* ================= REGISTRATION MODAL ================= */
+.modal { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: clamp(10px, 3vw, 36px); }
+.modal[hidden] { display: none; }
+.modal-scrim { position: absolute; inset: 0; background: rgba(16,9,5,.82); backdrop-filter: blur(4px); }
+.modal-panel {
+  position: relative; width: min(1040px, 100%); height: min(88vh, 900px);
+  background: var(--paper); border-radius: var(--radius);
+  display: flex; flex-direction: column; overflow: hidden;
+  box-shadow: 0 40px 90px rgba(0,0,0,.6);
+}
+.modal-bar { display: flex; align-items: center; gap: 14px; padding: 14px 16px 14px 20px; border-bottom: 1px solid var(--rule); background: var(--paper); flex: 0 0 auto; }
+.modal-title { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; margin: 0; }
+.modal-actions { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+.modal-link { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink); }
+.modal-close {
+  width: 36px; height: 36px; display: grid; place-items: center; cursor: pointer;
+  background: transparent; border: 1px solid rgba(19,19,19,.26); border-radius: var(--radius);
+  font-size: 18px; line-height: 1; color: var(--ink);
+}
+.modal-close:hover { background: var(--paper-2); }
+.modal-body { position: relative; flex: 1 1 auto; min-height: 0; background: var(--paper-2); }
+.modal-body iframe { width: 100%; height: 100%; border: 0; display: block; background: var(--paper); }
+
+.frame-fallback {
+  position: absolute; inset: 0; display: grid; place-content: center; justify-items: start;
+  gap: 14px; padding: clamp(24px, 5vw, 56px); background: var(--paper); text-align: left;
+}
+.frame-fallback h3 { font-family: var(--mono); font-size: clamp(18px, 2.2vw, 24px); text-transform: uppercase; letter-spacing: .02em; margin: 0; }
+.frame-fallback p { margin: 0; max-width: 52ch; font-size: 15.5px; line-height: 1.65; color: rgba(19,19,19,.72); }
+
+.modal-loading {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+  color: rgba(19,19,19,.5); background: var(--paper);
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1080px) {
+  .nav { display: none; }
+}
+@media (max-width: 900px) {
+  .hero-in { grid-template-columns: minmax(0, 1fr); }
+  /* concierge sits immediately below the CTA on mobile */
+  .concierge { margin-top: 6px; }
+  .factpill { width: 100%; }
+  .fact { flex: 1 1 auto; }
+  .modal-panel { height: 92vh; }
+}
+@media (max-width: 560px) {
+  .masthead-in { height: 62px; }
+  .masthead-cta .btn-ghost { display: none; }
+  .fact dd { white-space: normal; }
+  .factpill-star { display: none; }
+  .btn-coral, .btn-outline-cream { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+@media print { .concierge, .masthead-cta, .modal { display: none !important; } }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ===================== HEADER ===================== -->
+<header class="masthead">
+  <div class="wrap masthead-in">
+    <a class="brand" href="https://www.testmuai.com/" data-track="nav_home">
+      <svg class="brand-mark" viewBox="0 0 22 24" aria-hidden="true">
+        <rect x="0" y="2" width="3.6" height="20" rx="1" fill="#131313"/>
+        <rect x="6.4" y="2" width="3.6" height="9" rx="1" fill="#131313"/>
+        <rect x="6.4" y="13" width="3.6" height="9" rx="1" fill="#131313"/>
+        <rect x="12.8" y="2" width="3.6" height="20" rx="1" fill="#131313"/>
+        <rect x="18.4" y="2" width="3.6" height="13" rx="1" fill="#FF4F4A"/>
+      </svg>
+      <span class="brand-text">
+        <span class="brand-name">TestMu AI</span>
+        <span class="brand-sub">Formerly LambdaTest</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="https://www.testmuai.com/">Platform</a>
+      <a href="https://www.testmuai.com/">Solutions</a>
+      <a href="https://www.testmuai.com/">Resources</a>
+      <a href="https://www.testmuai.com/">AI Agents</a>
+      <a href="https://www.testmuai.com/pricing/">Pricing</a>
+    </nav>
+    <div class="masthead-cta">
+      <a class="btn btn-ghost" href="https://www.testmuai.com/" data-track="nav_demo">Book a Demo</a>
+      <a class="btn btn-ink" href="https://www.testmuai.com/" data-track="nav_start">Get Started Free</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-art" id="heroArt"></div>
+    <div class="hero-desk" aria-hidden="true"></div>
+    <div class="hero-grain" aria-hidden="true"></div>
+
+    <div class="wrap hero-in">
+      <div class="hero-copy">
+        <p class="label hero-eyebrow" id="heroEyebrow">TestMu Events</p>
+        <h1 class="hero-title" id="heroTitle"></h1>
+        <p class="hero-sub" id="heroSub"></p>
+        <p class="hero-lede" id="heroLede"></p>
+
+        <dl class="factpill" id="heroFacts" hidden>
+          <div class="factpill-star" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#FFFFDE" stroke-width="1.4">
+              <circle cx="12" cy="12" r="10.4"/><path d="M12 4.6v14.8M4.6 12h14.8M6.8 6.8l10.4 10.4M17.2 6.8L6.8 17.2"/>
+            </svg>
+          </div>
+        </dl>
+
+        <div class="hero-actions">
+          <a class="btn btn-coral" id="primaryCta" href="#"></a>
+          <a class="btn btn-outline-cream" id="secondaryCta" href="#" hidden></a>
+        </div>
+      </div>
+
+      <!-- ============ Event Concierge ============ -->
+      <aside class="concierge" id="concierge" aria-labelledby="conciergeTitle">
+        <div class="concierge-head">
+          <p class="label concierge-kicker" id="conciergeKicker">TestMu Events</p>
+          <h2 class="concierge-title" id="conciergeTitle">Your Event Guide</h2>
+          <p class="concierge-blurb" id="conciergeBlurb">A TestMu guide who knows this event — ask anything, or pick a starting point.</p>
+        </div>
+
+        <div class="concierge-opening">
+          <span class="who">Event Guide</span>
+          <span id="conciergeOpening"></span>
+        </div>
+
+        <ul class="starters" id="starters" aria-label="Suggested starting points"></ul>
+
+        <div class="concierge-foot">
+          <p class="concierge-note">No sign-in needed. Browsing and reading never creates a record.</p>
+          <button class="btn btn-ink" id="openConcierge" type="button">Ask the guide</button>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ===================== RESOURCES ===================== -->
+  <section class="section section-paper" id="resources" aria-labelledby="resTitle">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label section-kicker" id="resKicker">Start here</p>
+        <h2 class="section-title" id="resTitle">Worth your time</h2>
+        <p class="section-lede" id="resLede"></p>
+      </div>
+      <div class="cards" id="resourceCards"></div>
+    </div>
+  </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section class="section section-ivory" id="faq" aria-labelledby="faqTitle">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label section-kicker">Questions</p>
+        <h2 class="section-title" id="faqTitle">Straight answers</h2>
+        <p class="section-lede" id="faqLede">Everything below is the approved answer set for this event. Anything not covered here, ask the guide.</p>
+      </div>
+      <div class="faq" id="faqList"></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="foot">
+  <div class="wrap foot-in">
+    <a class="brand" href="https://www.testmuai.com/" style="text-decoration:none">
+      <svg class="brand-mark" viewBox="0 0 22 24" aria-hidden="true">
+        <rect x="0" y="2" width="3.6" height="20" rx="1" fill="#FFFFDE"/>
+        <rect x="6.4" y="2" width="3.6" height="9" rx="1" fill="#FFFFDE"/>
+        <rect x="6.4" y="13" width="3.6" height="9" rx="1" fill="#FFFFDE"/>
+        <rect x="12.8" y="2" width="3.6" height="20" rx="1" fill="#FFFFDE"/>
+        <rect x="18.4" y="2" width="3.6" height="13" rx="1" fill="#FF4F4A"/>
+      </svg>
+      <span class="brand-text">
+        <span class="brand-name">TestMu AI</span>
+        <span class="brand-sub">Formerly LambdaTest</span>
+      </span>
+    </a>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="https://www.testmuai.com/testmuconf-2027/">Testμ Conf '27</a>
+      <a href="https://www.testmuai.com/testmuconf-2026/">Conf '26 Archive</a>
+      <a href="https://www.testmuai.com/bootcamp/">Bootcamp</a>
+      <a href="https://www.testmuai.com/support/docs/">Docs</a>
+      <a href="https://www.testmuai.com/">Privacy</a>
+    </nav>
+    <p class="foot-fine">© <span id="year"></span> TestMu AI. Event pages for TestMu conferences, replays and certifications.</p>
+  </div>
+</footer>
+
+<!-- ===================== REGISTRATION MODAL ===================== -->
+<div class="modal" id="regModal" hidden role="dialog" aria-modal="true" aria-labelledby="regModalTitle">
+  <div class="modal-scrim" data-close></div>
+  <div class="modal-panel">
+    <div class="modal-bar">
+      <h2 class="modal-title" id="regModalTitle">Testμ Conf '27 — Registration</h2>
+      <div class="modal-actions">
+        <a class="modal-link" id="regNewTab" href="#" target="_blank" rel="noopener">Open in new tab ↗</a>
+        <button class="modal-close" type="button" data-close aria-label="Close registration">×</button>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-loading" id="regLoading">Loading registration…</div>
+      <iframe id="regFrame" title="Testμ Conf '27 registration" src="about:blank"
+              referrerpolicy="no-referrer-when-downgrade"
+              allow="clipboard-write"></iframe>
+      <div class="frame-fallback" id="regFallback" hidden>
+        <h3>Registration opens on testmuai.com</h3>
+        <p>This form can't be displayed inside another page. Your place and everything that brought you here is carried straight over — nothing is lost.</p>
+        <a class="btn btn-coral" id="regFallbackLink" href="#" target="_blank" rel="noopener">Continue to registration ↗</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ==========================================================================
+     1. CAMPAIGN CONFIGURATION
+     --------------------------------------------------------------------------
+     One entry per supported motion. `event_program` (or utm_campaign) selects
+     the entry. Everything a marketer needs to change lives in this object.
+     FAQ sets are versioned via `faqSet` so the concierge and the page always
+     agree on which approved answer set is live.
+     ========================================================================== */
+
+  var TESTMU = "https://www.testmuai.com";
+
+  var CAMPAIGNS = {
+
+    /* ---------------- Testμ Conf '27 — registration ---------------- */
+    "testmuconf-2027": {
+      faqSet: "conf-2027-v1",
+      phase: "registration",
+      eyebrow: "Testmu-Conf 2027",
+      titleHtml: 'TEST<span class="accent">μ</span><br>C<span class="star" data-star></span>NF&rsquo;27',
+      sub: "World's largest virtual agentic engineering &amp; quality conference",
+      lede: "Three days, one global room. Speakers shipping AI-native quality at scale, hands-on tracks, and community challenges — all of it free and all of it virtual.",
+      facts: [
+        { k: "When",  v: "Aug 24–26" },
+        { k: "Where", v: "Virtual · Global" },
+        { k: "Cost",  v: "Free" }
+      ],
+      cta: {
+        label: "Get your free boarding pass",
+        mode: "iframe",
+        url: TESTMU + "/testmuconf-2027/",
+        event: "registration_opened"
+      },
+      secondaryCta: { label: "Watch Conf '26 sessions", url: TESTMU + "/testmuconf-2026/" },
+      concierge: {
+        kicker: "Conf '27 Concierge",
+        title: "Plan your Conf '27",
+        blurb: "A TestMu guide who knows the agenda. Ask about tracks, timing or the format — or get registered in a minute.",
+        opening: "There's a lot on the Conf '27 agenda. Tell me what you're building and testing, and I'll point you at the sessions actually worth blocking time for.",
+        starters: [
+          "Which sessions fit my stack?",
+          "What time zone do the sessions run in?",
+          "Will the talks be recorded?"
+        ]
+      },
+      resources: {
+        kicker: "Before you go",
+        title: "Get the most out of Conf '27",
+        lede: "Pick your tracks, see who's speaking, and catch up on last year before the doors open.",
+        cards: [
+          { tag: "Agenda",     title: "Tracks and sessions",        desc: "Agentic engineering, AI-assisted testing, quality at scale, and hands-on workshops across three days.", url: TESTMU + "/testmuconf-2027/" },
+          { tag: "Speakers",   title: "Who you'll hear from",       desc: "Engineering and quality leaders from across the industry, plus practitioners shipping this work today.", url: TESTMU + "/testmuconf-2027/" },
+          { tag: "On demand",  title: "Testμ Conf '26 replay",      desc: "Every session from last year's conference, free to watch while you wait for '27.", url: TESTMU + "/testmuconf-2026/" },
+          { tag: "Skills",     title: "Bootcamp &amp; certifications", desc: "Turn what you learn at the conference into a credential your team can see.", url: TESTMU + "/bootcamp/" }
+        ]
+      },
+      faqs: [
+        { q: "When is Testμ Conf '27 and how long does it run?", a: "August 24–26. Three consecutive days of sessions, with the programme spread across the day so people in different regions can catch live content." },
+        { q: "Is it virtual or in person?", a: "Fully virtual and global. You join from wherever you are — there's no travel, no venue and no regional edition to pick between." },
+        { q: "What does it cost?", a: "Nothing. Testμ Conf is free to attend. Your boarding pass is your registration; there's no paid tier to unlock sessions." },
+        { q: "What time zone do sessions run in?", a: "Sessions are scheduled across the day to cover the major regions rather than anchored to one time zone. Once you register, the agenda displays in your own local time, and anything you miss live is available afterwards." },
+        { q: "Will sessions be recorded?", a: "Yes. Sessions are recorded and published after the conference, the same way the Conf '26 archive works. Registering is still worth it — live Q&amp;A and the community challenges only happen in the moment." },
+        { q: "Who actually attends?", a: "QA and test engineers, SDETs, developers who own their own quality, engineering managers, and platform teams. If you are responsible for whether software ships correctly, you are the audience." },
+        { q: "Are there challenges or prizes?", a: "Yes — the conference runs community challenges alongside the talks, with prizes. Details are published on the conference page as the dates get closer." },
+        { q: "How do I register?", a: "Use the boarding pass button on this page. It opens TestMu's own registration form — the same form as on the main conference page — so your details go straight into TestMu's systems and nowhere else." }
+      ]
+    },
+
+    /* ---------------- Testμ Conf '26 — archive follow-up ---------------- */
+    "testmuconf-2026": {
+      faqSet: "conf-2026-v1",
+      phase: "archive",
+      eyebrow: "Testmu-Conf 2026 · On demand",
+      titleHtml: 'TEST<span class="accent">μ</span><br>C<span class="star" data-star></span>NF&rsquo;26',
+      sub: "Every session, talk and workshop — on demand",
+      lede: "The full Conf '26 programme is recorded and free to watch. The hard part isn't access, it's knowing which forty minutes are the ones you need.",
+      facts: [
+        { k: "What",  v: "3 days of sessions" },
+        { k: "Where", v: "On demand" },
+        { k: "Cost",  v: "Free" }
+      ],
+      cta: {
+        label: "Browse the 2026 archive",
+        mode: "newtab",
+        url: TESTMU + "/testmuconf-2026/",
+        event: "archive_opened"
+      },
+      secondaryCta: { label: "See what's coming in '27", url: TESTMU + "/testmuconf-2027/" },
+      concierge: {
+        kicker: "Conf '26 Concierge",
+        title: "Find the session you need",
+        blurb: "Tell the guide what you're working on and it will point you at the recordings that actually address it.",
+        opening: "The '26 archive is big. Tell me what you're working on right now — a flaky suite, slow CI, an accessibility audit — and I'll point you at the sessions that address it.",
+        starters: [
+          "Show me sessions on AI-assisted testing",
+          "What covered CI speed and flakiness?",
+          "Where do I find the recordings?"
+        ]
+      },
+      resources: {
+        kicker: "In the archive",
+        title: "Where people usually start",
+        lede: "Four entry points into the Conf '26 recordings, depending on what you came for.",
+        cards: [
+          { tag: "Archive",   title: "All Conf '26 sessions",   desc: "The complete recorded programme — keynotes, tracks and workshops, free to watch.", url: TESTMU + "/testmuconf-2026/" },
+          { tag: "Next up",   title: "Testμ Conf '27",          desc: "August 24–26, virtual and free. Register now so you catch the next one live.", url: TESTMU + "/testmuconf-2027/" },
+          { tag: "Skills",    title: "Bootcamp &amp; certifications", desc: "Go from watching a session to holding a certification your team can verify.", url: TESTMU + "/bootcamp/" },
+          { tag: "Docs",      title: "Put it into practice",    desc: "Product documentation for the tooling the sessions demonstrate.", url: TESTMU + "/support/docs/" }
+        ]
+      },
+      faqs: [
+        { q: "Where do I find the Conf '26 recordings?", a: "They live on the Testμ Conf '26 page on testmuai.com. Everything is free and nothing is gated behind a second form — the archive button on this page takes you straight there." },
+        { q: "How do I find a specific session?", a: "The archive is organised by day and track. If you know the speaker or the topic, the guide on this page can narrow it down for you faster than scrolling — just describe what you're after." },
+        { q: "I only have an hour. What should I watch?", a: "Tell the guide what you're working on and it will pick a short path rather than handing you the full list. Most people get more out of two targeted sessions than a keynote they half-watch." },
+        { q: "Are there topic paths rather than single talks?", a: "Yes — sessions cluster into themes like AI-assisted test creation, CI speed and orchestration, cross-browser and real-device coverage, visual regression, and accessibility. The guide can walk you through a theme end to end." },
+        { q: "Do I get a certificate for watching?", a: "Watching the archive doesn't carry a credential. Certifications come through TestMu's bootcamp and certification programme, which is a separate track — linked above." },
+        { q: "When is the next conference?", a: "Testμ Conf '27 runs August 24–26, virtual and free. Registration is open now, and it's the same boarding-pass form as always." }
+      ]
+    },
+
+    /* ---------------- Learning / certification ---------------- */
+    "testmu-learning": {
+      faqSet: "learning-v1",
+      phase: "learning",
+      eyebrow: "Testmu Learning",
+      titleHtml: 'B<span class="star" data-star></span><span class="accent">O</span>TCAMPS<br>&amp; CERTS',
+      sub: "Build AI-native testing skills that hold up in production",
+      lede: "Structured paths that take you from a working knowledge of a framework to a certification your team — and your next employer — can actually verify.",
+      facts: [
+        { k: "Format", v: "Self-paced" },
+        { k: "Where",  v: "Online" },
+        { k: "Cost",   v: "Free to start" }
+      ],
+      cta: {
+        label: "Explore learning paths",
+        mode: "newtab",
+        url: TESTMU + "/bootcamp/",
+        event: "learning_opened"
+      },
+      secondaryCta: { label: "Watch Conf '26 sessions", url: TESTMU + "/testmuconf-2026/" },
+      concierge: {
+        kicker: "Learning Concierge",
+        title: "Pick the right path",
+        blurb: "There are several paths and they don't all suit the same person. The guide helps you choose one and tells you what it assumes you already know.",
+        opening: "Are you picking up a new skill yourself, or getting a team to a shared baseline? The answer changes which path I'd point you at.",
+        starters: [
+          "Which path should I start with?",
+          "What do I need to know first?",
+          "Can I certify a whole team?"
+        ]
+      },
+      resources: {
+        kicker: "Paths",
+        title: "Where to begin",
+        lede: "Four ways in, depending on whether you're building your own skills or levelling up a team.",
+        cards: [
+          { tag: "Bootcamp",      title: "Certification paths",    desc: "Structured, self-paced courses ending in a verifiable TestMu certification.", url: TESTMU + "/bootcamp/" },
+          { tag: "Foundations",   title: "Automation fundamentals", desc: "Selenium, Cypress and Appium from the ground up, for people new to automated testing.", url: TESTMU + "/bootcamp/" },
+          { tag: "Docs",          title: "Product documentation",   desc: "Reference material for everything the courses demonstrate hands-on.", url: TESTMU + "/support/docs/" },
+          { tag: "Community",     title: "Conf '26 sessions",       desc: "Conference talks that pair well with the courses — free and on demand.", url: TESTMU + "/testmuconf-2026/" }
+        ]
+      },
+      faqs: [
+        { q: "Which learning path should I start with?", a: "It depends on what you already do day to day. If you write automated tests, the framework-specific paths are the fastest win; if you're moving into quality from development or manual testing, start with the fundamentals. The guide on this page can narrow it to one." },
+        { q: "What do the courses assume I already know?", a: "The fundamentals paths assume no automation background — just comfort with a codebase. Framework and advanced paths assume you've written tests before and know your way around a CI pipeline." },
+        { q: "Do I get a certification at the end?", a: "Yes. The bootcamp paths end in a TestMu certification that can be shared and verified, rather than a completion badge with nothing behind it." },
+        { q: "How long does a path take?", a: "They're self-paced, so it's up to you. Most people work through a path over a few weeks alongside their normal work rather than in one sitting." },
+        { q: "Can I put a whole team through this?", a: "Yes — teams commonly use the paths to get everyone to the same baseline before rolling out new tooling. If that's what you're planning, say so to the guide and it can get the right person to talk it through with you." },
+        { q: "Does this cost anything?", a: "The learning paths are free to start. Anything that isn't is stated clearly on the bootcamp page before you commit." }
+      ]
+    },
+
+    /* ---------------- Fallback: no / unknown campaign ---------------- */
+    "_default": {
+      faqSet: "events-general-v1",
+      phase: "explore",
+      eyebrow: "Testmu Events",
+      titleHtml: 'EXPL<span class="star" data-star></span>RE<br>TEST<span class="accent">μ</span> EVENTS',
+      sub: "Conferences, replays and certifications for AI-native quality",
+      lede: "Three ways in: register for the next conference, catch up on the last one, or pick up a certification. Take whichever one you came for.",
+      facts: [],
+      cta: {
+        label: "Register for Conf '27",
+        mode: "newtab",
+        url: TESTMU + "/testmuconf-2027/",
+        event: "explore_cta"
+      },
+      secondaryCta: { label: "Browse Conf '26 archive", url: TESTMU + "/testmuconf-2026/" },
+      concierge: {
+        kicker: "TestMu Events",
+        title: "Your event guide",
+        blurb: "Not sure which of these you need? Say what you're after and the guide will get you to the right place.",
+        opening: "Looking for the next conference, a session you missed, or a certification? Tell me which and I'll take you straight there.",
+        starters: [
+          "When is the next Testμ Conf?",
+          "I missed a session last year",
+          "I want a certification"
+        ]
+      },
+      resources: {
+        kicker: "Three ways in",
+        title: "Pick your starting point",
+        lede: "Every TestMu event motion in one place.",
+        cards: [
+          { tag: "Upcoming",  title: "Testμ Conf '27",        desc: "August 24–26, virtual and global. Free to attend — get your boarding pass.", url: "?event_program=testmuconf-2027&amp;event_phase=registration" },
+          { tag: "On demand", title: "Testμ Conf '26 archive", desc: "Every session from last year's conference, recorded and free to watch.", url: "?event_program=testmuconf-2026&amp;event_phase=archive" },
+          { tag: "Skills",    title: "Bootcamp &amp; certifications", desc: "Self-paced paths ending in a verifiable TestMu certification.", url: "?event_program=testmu-learning&amp;event_phase=learning" },
+          { tag: "Docs",      title: "Product documentation",  desc: "Reference material for the TestMu platform and its integrations.", url: TESTMU + "/support/docs/" }
+        ]
+      },
+      faqs: [
+        { q: "What is Testμ Conf?", a: "TestMu's annual virtual conference on agentic engineering and quality — built with the testing community, free to attend, and global. The next edition runs August 24–26." },
+        { q: "Can I still watch last year's sessions?", a: "Yes. The Conf '26 programme is recorded in full and free to watch on demand. Nothing is gated." },
+        { q: "What's the difference between the conference and the bootcamp?", a: "The conference is three days of talks and community sessions. The bootcamp is a self-paced learning track that ends in a certification. People often do both — the conference for what's changing, the bootcamp for the skill itself." },
+        { q: "Does any of this cost money?", a: "The conference is free and the learning paths are free to start. Anything that carries a cost says so on its own page before you commit." }
+      ]
+    }
+  };
+
+  /* Aliases so a stray utm_campaign value still resolves cleanly. */
+  var ALIASES = {
+    "testmuconf27": "testmuconf-2027", "testmuconf-27": "testmuconf-2027",
+    "testmu-conf-2027": "testmuconf-2027", "conf-2027": "testmuconf-2027", "conf2027": "testmuconf-2027",
+    "testmuconf26": "testmuconf-2026", "testmuconf-26": "testmuconf-2026",
+    "testmu-conf-2026": "testmuconf-2026", "conf-2026": "testmuconf-2026", "conf2026": "testmuconf-2026",
+    "learning": "testmu-learning", "bootcamp": "testmu-learning",
+    "testmu-bootcamp": "testmu-learning", "certification": "testmu-learning", "certifications": "testmu-learning"
+  };
+
+  /* Docket agent — set after the "Kane [Campaign Concierge]" clone is created.
+     The widget script is copied verbatim from that agent's Deploy tab. */
+  var DOCKET_AGENT_ID = "d4541928-0a92-4eb9-ae71-4e2a12b2ef06";
+
+  /* ==========================================================================
+     2. URL CONTEXT
+     ========================================================================== */
+
+  var PUBLIC_PARAMS = [
+    "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term",
+    "event_program", "event_phase", "event_topic", "event_content", "event_cta",
+    "intent", "ctx"
+  ];
+
+  function clean(v) {
+    if (typeof v !== "string") return "";
+    // Defensive: values are only ever used as data, never written to the DOM as HTML.
+    return v.trim().slice(0, 120).replace(/[^\w\s.@:\/\-]/g, "");
+  }
+
+  function readParams() {
+    var q, out = {}, i, k, v;
+    try { q = new URLSearchParams(window.location.search); } catch (e) { return out; }
+    for (i = 0; i < PUBLIC_PARAMS.length; i++) {
+      k = PUBLIC_PARAMS[i];
+      v = clean(q.get(k) || "");
+      if (v) out[k] = v;
+    }
+    return out;
+  }
+
+  function resolveCampaign(params) {
+    var raw = (params.event_program || params.utm_campaign || "").toLowerCase();
+    if (!raw) return { key: "_default", resolved: false, reason: "absent" };
+    var key = CAMPAIGNS[raw] ? raw : (ALIASES[raw] && CAMPAIGNS[ALIASES[raw]] ? ALIASES[raw] : null);
+    if (!key) return { key: "_default", resolved: false, reason: "unknown" };
+    return { key: key, resolved: true, reason: "matched" };
+  }
+
+  var PARAMS = readParams();
+  var MATCH = resolveCampaign(PARAMS);
+  var CFG = CAMPAIGNS[MATCH.key];
+
+  /* ==========================================================================
+     3. ANALYTICS
+     Fires into dataLayer / PostHog when present. Never carries PII, and never
+     carries the opaque ctx token.
+     ========================================================================== */
+
+  function track(name, props) {
+    var payload = {
+      event: name,
+      campaign_key: MATCH.key,
+      campaign_resolved: MATCH.resolved,
+      event_phase: CFG.phase,
+      faq_set: CFG.faqSet,
+      utm_source: PARAMS.utm_source || null,
+      utm_medium: PARAMS.utm_medium || null,
+      utm_campaign: PARAMS.utm_campaign || null,
+      utm_content: PARAMS.utm_content || null
+    };
+    if (props) { for (var k in props) { if (Object.prototype.hasOwnProperty.call(props, k)) payload[k] = props[k]; } }
+    try { (window.dataLayer = window.dataLayer || []).push(payload); } catch (e) {}
+    try { if (window.posthog && window.posthog.capture) window.posthog.capture(name, payload); } catch (e) {}
+    if (/[?&]debug=1/.test(window.location.search)) { try { console.log("[testmu]", name, payload); } catch (e) {} }
+  }
+  window.testmuTrack = track;
+
+  /* ==========================================================================
+     4. RENDER
+     ========================================================================== */
+
+  var STAR_SVG =
+    '<svg viewBox="0 0 40 40" aria-hidden="true" focusable="false">' +
+    '<g fill="#FF4F4A">' +
+    '<circle cx="20" cy="20" r="6.4"/>' +
+    '<rect x="17.6" y="0" width="4.8" height="13" rx="2.4"/>' +
+    '<rect x="17.6" y="27" width="4.8" height="13" rx="2.4"/>' +
+    '<rect x="0" y="17.6" width="13" height="4.8" rx="2.4"/>' +
+    '<rect x="27" y="17.6" width="13" height="4.8" rx="2.4"/>' +
+    '<rect x="17.6" y="0" width="4.8" height="13" rx="2.4" transform="rotate(45 20 20)"/>' +
+    '<rect x="17.6" y="27" width="4.8" height="13" rx="2.4" transform="rotate(45 20 20)"/>' +
+    '<rect x="0" y="17.6" width="13" height="4.8" rx="2.4" transform="rotate(45 20 20)"/>' +
+    '<rect x="27" y="17.6" width="13" height="4.8" rx="2.4" transform="rotate(45 20 20)"/>' +
+    '</g></svg>';
+
+  function $(id) { return document.getElementById(id); }
+  function text(el, s) { if (el) el.textContent = s; }
+
+  function renderHero() {
+    text($("heroEyebrow"), CFG.eyebrow);
+    $("heroTitle").innerHTML = CFG.titleHtml;
+    Array.prototype.forEach.call($("heroTitle").querySelectorAll("[data-star]"), function (n) { n.innerHTML = STAR_SVG; });
+    $("heroSub").innerHTML = CFG.sub;
+    text($("heroLede"), CFG.lede);
+
+    var facts = $("heroFacts");
+    if (CFG.facts && CFG.facts.length) {
+      CFG.facts.forEach(function (f) {
+        var d = document.createElement("div");
+        d.className = "fact";
+        var dt = document.createElement("dt"); dt.className = "label"; dt.textContent = f.k;
+        var dd = document.createElement("dd"); dd.textContent = f.v;
+        d.appendChild(dt); d.appendChild(dd); facts.appendChild(d);
+      });
+      facts.hidden = false;
+    }
+
+    var primary = $("primaryCta");
+    primary.textContent = CFG.cta.label;
+    if (CFG.cta.mode === "iframe") {
+      primary.href = withParams(CFG.cta.url);
+      primary.addEventListener("click", function (e) { e.preventDefault(); openRegistration(); });
+    } else {
+      primary.href = withParams(CFG.cta.url);
+      primary.target = "_blank"; primary.rel = "noopener";
+      primary.addEventListener("click", function () { track(CFG.cta.event, { destination: CFG.cta.url }); });
+    }
+
+    var secondary = $("secondaryCta");
+    if (CFG.secondaryCta) {
+      secondary.textContent = CFG.secondaryCta.label;
+      secondary.href = withParams(CFG.secondaryCta.url);
+      secondary.target = "_blank"; secondary.rel = "noopener";
+      secondary.hidden = false;
+      secondary.addEventListener("click", function () { track("secondary_cta_clicked", { destination: CFG.secondaryCta.url }); });
+    }
+  }
+
+  /* Carry attribution forward onto TestMu-owned destinations only. */
+  function withParams(url) {
+    if (!url) return "#";
+    if (url.charAt(0) === "?") return url;                       // internal campaign switch
+    if (url.indexOf("https://www.testmuai.com") !== 0) return url;
+    var u;
+    try { u = new URL(url); } catch (e) { return url; }
+    for (var i = 0; i < PUBLIC_PARAMS.length; i++) {
+      var k = PUBLIC_PARAMS[i];
+      if (PARAMS[k]) u.searchParams.set(k, PARAMS[k]);
+    }
+    return u.toString();
+  }
+
+  function renderConcierge() {
+    var c = CFG.concierge;
+    text($("conciergeKicker"), c.kicker);
+    text($("conciergeTitle"), c.title);
+    $("conciergeBlurb").innerHTML = c.blurb;
+    text($("conciergeOpening"), c.opening);
+
+    var list = $("starters");
+    c.starters.forEach(function (s, idx) {
+      var li = document.createElement("li");
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "starter";
+      var span = document.createElement("span"); span.textContent = s;
+      var chev = document.createElement("span"); chev.className = "chev"; chev.textContent = "→"; chev.setAttribute("aria-hidden", "true");
+      b.appendChild(span); b.appendChild(chev);
+      b.addEventListener("click", function () {
+        track("agent_starter_selected", { starter_index: idx + 1, starter: s });
+        openConcierge(s);
+      });
+      li.appendChild(b); list.appendChild(li);
+    });
+
+    $("openConcierge").addEventListener("click", function () {
+      track("agent_opened", { source: "concierge_button" });
+      openConcierge(null);
+    });
+  }
+
+  function renderResources() {
+    var r = CFG.resources;
+    text($("resKicker"), r.kicker);
+    $("resTitle").innerHTML = r.title;
+    text($("resLede"), r.lede);
+
+    var host = $("resourceCards");
+    r.cards.forEach(function (card) {
+      var a = document.createElement("a");
+      a.className = "card";
+      var isInternal = card.url.charAt(0) === "?";
+      a.href = isInternal ? card.url.replace(/&amp;/g, "&") : withParams(card.url);
+      if (!isInternal) { a.target = "_blank"; a.rel = "noopener"; }
+
+      var tag = document.createElement("p"); tag.className = "label card-tag"; tag.innerHTML = card.tag;
+      var t = document.createElement("h3"); t.className = "card-title"; t.innerHTML = card.title;
+      var d = document.createElement("p"); d.className = "card-desc"; d.innerHTML = card.desc;
+      var g = document.createElement("span"); g.className = "card-go"; g.textContent = isInternal ? "Switch" : "Open";
+
+      a.appendChild(tag); a.appendChild(t); a.appendChild(d); a.appendChild(g);
+      a.addEventListener("click", function () { track("resource_clicked", { resource: a.querySelector(".card-title").textContent }); });
+      host.appendChild(a);
+    });
+  }
+
+  function renderFaqs() {
+    var host = $("faqList");
+    CFG.faqs.forEach(function (item, i) {
+      var wrap = document.createElement("div"); wrap.className = "faq-item";
+      var btn = document.createElement("button");
+      btn.type = "button"; btn.className = "faq-q";
+      btn.setAttribute("aria-expanded", "false");
+      btn.id = "faq-q-" + i;
+      btn.setAttribute("aria-controls", "faq-a-" + i);
+
+      var qt = document.createElement("span"); qt.textContent = item.q;
+      var mk = document.createElement("span"); mk.className = "mark"; mk.textContent = "+"; mk.setAttribute("aria-hidden", "true");
+      btn.appendChild(qt); btn.appendChild(mk);
+
+      var ans = document.createElement("div");
+      ans.className = "faq-a"; ans.id = "faq-a-" + i;
+      ans.setAttribute("role", "region");
+      ans.setAttribute("aria-labelledby", "faq-q-" + i);
+      ans.hidden = true;
+      var p = document.createElement("p"); p.innerHTML = item.a; ans.appendChild(p);
+
+      btn.addEventListener("click", function () {
+        var open = btn.getAttribute("aria-expanded") === "true";
+        btn.setAttribute("aria-expanded", open ? "false" : "true");
+        ans.hidden = open;
+        mk.textContent = open ? "+" : "+";
+        if (!open) track("faq_opened", { question: item.q, faq_set: CFG.faqSet, faq_index: i + 1 });
+      });
+
+      wrap.appendChild(btn); wrap.appendChild(ans); host.appendChild(wrap);
+    });
+  }
+
+  /* ==========================================================================
+     5. REGISTRATION MODAL (iframe + graceful fallback)
+     ========================================================================== */
+
+  var modal = $("regModal"), frame = $("regFrame"), loading = $("regLoading"),
+      fallback = $("regFallback"), lastFocus = null, frameTimer = null, frameLoaded = false;
+
+  function openRegistration() {
+    var url = withParams(CFG.cta.url);
+    lastFocus = document.activeElement;
+    $("regNewTab").href = url;
+    $("regFallbackLink").href = url;
+
+    frameLoaded = false;
+    fallback.hidden = true;
+    loading.hidden = false;
+    frame.hidden = false;
+    frame.src = url;
+
+    modal.hidden = false;
+    document.body.style.overflow = "hidden";
+    track("registration_opened", { mode: "iframe", destination: CFG.cta.url });
+
+    // If the frame never reports a load, embedding was refused — swap in the link.
+    clearTimeout(frameTimer);
+    frameTimer = setTimeout(function () { if (!frameLoaded) showFrameFallback("timeout"); }, 4500);
+
+    setTimeout(function () { $("regNewTab").focus(); }, 30);
+  }
+
+  function showFrameFallback(reason) {
+    loading.hidden = true;
+    frame.hidden = true;
+    fallback.hidden = false;
+    track("registration_frame_blocked", { reason: reason });
+  }
+
+  frame.addEventListener("load", function () {
+    if (frame.src === "about:blank") return;
+    frameLoaded = true;
+    loading.hidden = true;
+  });
+  frame.addEventListener("error", function () { showFrameFallback("error"); });
+
+  // A page-level CSP refusal (frame-ancestors) surfaces here in modern browsers.
+  window.addEventListener("securitypolicyviolation", function (e) {
+    if (e && e.violatedDirective && e.violatedDirective.indexOf("frame") !== -1) showFrameFallback("csp");
+  });
+
+  function closeRegistration() {
+    modal.hidden = true;
+    frame.src = "about:blank";
+    document.body.style.overflow = "";
+    clearTimeout(frameTimer);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  Array.prototype.forEach.call(modal.querySelectorAll("[data-close]"), function (el) {
+    el.addEventListener("click", closeRegistration);
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (modal.hidden) return;
+    if (e.key === "Escape") { closeRegistration(); return; }
+    if (e.key !== "Tab") return;
+    var f = modal.querySelectorAll('a[href], button:not([disabled]), iframe, [tabindex]:not([tabindex="-1"])');
+    if (!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+
+  // Optional non-PII completion signal from the TestMu success page.
+  window.addEventListener("message", function (e) {
+    if (e.origin !== "https://www.testmuai.com") return;
+    var d = e.data;
+    if (!d) return;
+    var type = (typeof d === "string") ? d : d.type;
+    if (type === "testmu:registration:complete" || type === "registration_complete") {
+      track("registration_completed", { source: "postmessage" });
+    }
+  }, false);
+
+  /* ==========================================================================
+     6. DOCKET EVENT CONCIERGE
+     The widget receives campaign context through Dynamic Context Ingestion.
+     Only the derived, non-identifying envelope is passed — never raw UTMs,
+     never the opaque ctx token, never CRM or account data.
+     ========================================================================== */
+
+  function dciEnvelope() {
+    return {
+      event_program:   MATCH.key === "_default" ? "explore" : MATCH.key,
+      event_phase:     PARAMS.event_phase || CFG.phase,
+      event_topic:     PARAMS.event_topic || "",
+      event_faq_set:   CFG.faqSet,
+      campaign_source: PARAMS.utm_source || "direct",
+      campaign_cta:    PARAMS.event_cta || (CFG.cta.mode === "iframe" ? "boarding-pass" : "explore"),
+      visitor_intent:  PARAMS.intent || "unknown"
+    };
+  }
+
+  function waitForWidget(ms) {
+    var start = Date.now();
+    return new Promise(function (resolve) {
+      (function poll() {
+        if (window.AISeller) return resolve(window.AISeller);
+        if (Date.now() - start > ms) return resolve(null);
+        setTimeout(poll, 120);
+      })();
+    });
+  }
+
+  var contextPrimed = false;
+  function primeContext() {
+    if (contextPrimed) return Promise.resolve();
+    contextPrimed = true;
+    return waitForWidget(15000).then(function (w) {
+      if (!w) return;
+      try {
+        if (typeof w.setContext === "function") {
+          return w.setContext(dciEnvelope());
+        }
+      } catch (e) {}
+    });
+  }
+
+  function openConcierge(starter) {
+    primeContext().then(function () {
+      var w = window.AISeller;
+      if (!w) {
+        // Widget unavailable — the page still works; point at the docs instead.
+        window.open("https://www.testmuai.com/support/docs/", "_blank", "noopener");
+        return;
+      }
+      try {
+        if (typeof w.open === "function") w.open();
+        else if (typeof w.openWidget === "function") w.openWidget();
+        else if (typeof w.show === "function") w.show();
+      } catch (e) {}
+      if (starter) {
+        try {
+          if (typeof w.sendMessage === "function") w.sendMessage(starter);
+          else if (typeof w.send === "function") w.send(starter);
+        } catch (e) {}
+      }
+    });
+  }
+
+  /* ==========================================================================
+     7. BOOT
+     ========================================================================== */
+
+  renderHero();
+  renderConcierge();
+  renderResources();
+  renderFaqs();
+  $("year").textContent = new Date().getFullYear();
+  document.title = (MATCH.key === "_default")
+    ? "TestMu AI — Events"
+    : "TestMu AI — " + CFG.concierge.title;
+
+  track("page_loaded", { referrer_present: !!document.referrer });
+  track("campaign_resolved", { resolution: MATCH.reason });
+
+  primeContext();
+
+})();
+</script>
+
+<!-- =========================================================================
+     DOCKET EVENT CONCIERGE WIDGET
+     Paste the embed snippet verbatim from the Deploy tab of the
+     "Kane [Campaign Concierge]" agent. The whitelist domain on that agent
+     must match the host this page is served from.
+     ========================================================================= -->
+<script>
+window.AISellerSettings = {
+  agent_id: 'd4541928-0a92-4eb9-ae71-4e2a12b2ef06',
+};
+// Then load the widget loader script
+(function () {
+  var w = window;
+  var ew = w.AISeller;
+  if (typeof ew === 'function') {
+    ew('update', w.AISellerSettings);
+  } else {
+    var d = document;
+    var i = function () {
+      i.q.push(arguments);
+    };
+    i.q = [];
+    i.q.push(['update', w.AISellerSettings]);
+    w.AISeller = i;
+    var l = function () {
+      var s = d.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.docketai.com/script/app/inbound-se-script/ai-seller.js';
+      var x = d.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    };
+    if (document.readyState === 'complete') {
+      l();
+    } else if (w.attachEvent) {
+      w.attachEvent('onload', l);
+    } else {
+      w.addEventListener('load', l, false);
+    }
+  }
+})();
+</script>
+
+</body>
+</html>
