@@ -117,7 +117,6 @@ a { color: inherit; }
   color: var(--ink); opacity: .9; white-space: nowrap;
 }
 .nav a:hover { opacity: 1; }
-.masthead-cta { margin-left: auto; display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
 
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 9px;
@@ -386,42 +385,6 @@ a { color: inherit; }
 .foot-links a:hover { color: var(--cream); }
 .foot-fine { width: 100%; border-top: 1px solid rgba(255,255,222,.14); margin-top: 30px; padding-top: 20px; font-family: var(--mono); font-size: 11px; letter-spacing: .04em; color: rgba(255,255,222,.42); }
 
-/* ================= REGISTRATION MODAL ================= */
-.modal { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; padding: clamp(10px, 3vw, 36px); }
-.modal[hidden] { display: none; }
-.modal-scrim { position: absolute; inset: 0; background: rgba(16,9,5,.82); backdrop-filter: blur(4px); }
-.modal-panel {
-  position: relative; width: min(1040px, 100%); height: min(88vh, 900px);
-  background: var(--paper); border-radius: var(--radius);
-  display: flex; flex-direction: column; overflow: hidden;
-  box-shadow: 0 40px 90px rgba(0,0,0,.6);
-}
-.modal-bar { display: flex; align-items: center; gap: 14px; padding: 14px 16px 14px 20px; border-bottom: 1px solid var(--rule); background: var(--paper); flex: 0 0 auto; }
-.modal-title { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; margin: 0; }
-.modal-actions { margin-left: auto; display: flex; align-items: center; gap: 10px; }
-.modal-link { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink); }
-.modal-close {
-  width: 36px; height: 36px; display: grid; place-items: center; cursor: pointer;
-  background: transparent; border: 1px solid rgba(19,19,19,.26); border-radius: var(--radius);
-  font-size: 18px; line-height: 1; color: var(--ink);
-}
-.modal-close:hover { background: var(--paper-2); }
-.modal-body { position: relative; flex: 1 1 auto; min-height: 0; background: var(--paper-2); }
-.modal-body iframe { width: 100%; height: 100%; border: 0; display: block; background: var(--paper); }
-
-.frame-fallback {
-  position: absolute; inset: 0; display: grid; place-content: center; justify-items: start;
-  gap: 14px; padding: clamp(24px, 5vw, 56px); background: var(--paper); text-align: left;
-}
-.frame-fallback h3 { font-family: var(--mono); font-size: clamp(18px, 2.2vw, 24px); text-transform: uppercase; letter-spacing: .02em; margin: 0; }
-.frame-fallback p { margin: 0; max-width: 52ch; font-size: 15.5px; line-height: 1.65; color: rgba(19,19,19,.72); }
-
-.modal-loading {
-  position: absolute; inset: 0; display: grid; place-items: center;
-  font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
-  color: rgba(19,19,19,.5); background: var(--paper);
-}
-
 /* ================= RESPONSIVE ================= */
 @media (max-width: 1080px) {
   .nav { display: none; }
@@ -432,11 +395,9 @@ a { color: inherit; }
   .points { margin-top: 6px; }
   .factpill { width: 100%; }
   .fact { flex: 1 1 auto; }
-  .modal-panel { height: 92vh; }
 }
 @media (max-width: 560px) {
   .masthead-in { height: 62px; }
-  .masthead-cta .btn-ghost { display: none; }
   .fact dd { white-space: normal; }
   .factpill-star { display: none; }
   .btn-coral, .btn-outline-cream { width: 100%; }
@@ -446,7 +407,6 @@ a { color: inherit; }
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
 
-@media print { .masthead-cta, .modal { display: none !important; } }
 </style>
 </head>
 <body>
@@ -472,10 +432,6 @@ a { color: inherit; }
     <nav class="nav" aria-label="Primary">
       <a href="https://www.testmuai.com/" data-out="nav-platform">Platform</a>
     </nav>
-    <div class="masthead-cta">
-      <a class="btn btn-ghost" href="https://www.testmuai.com/" data-out="nav-demo" data-track="nav_demo">Book a Demo</a>
-      <a class="btn btn-ink" href="https://www.testmuai.com/" data-out="nav-start" data-track="nav_start">Get Started Free</a>
-    </div>
   </div>
 </header>
 
@@ -560,31 +516,6 @@ a { color: inherit; }
   </div>
 </footer>
 
-<!-- ===================== REGISTRATION MODAL ===================== -->
-<div class="modal" id="regModal" hidden role="dialog" aria-modal="true" aria-labelledby="regModalTitle">
-  <div class="modal-scrim" data-close></div>
-  <div class="modal-panel">
-    <div class="modal-bar">
-      <h2 class="modal-title" id="regModalTitle">Testμ Conf '27 — Registration</h2>
-      <div class="modal-actions">
-        <a class="modal-link" id="regNewTab" href="#" target="_blank" rel="noopener">Open in new tab ↗</a>
-        <button class="modal-close" type="button" data-close aria-label="Close registration">×</button>
-      </div>
-    </div>
-    <div class="modal-body">
-      <div class="modal-loading" id="regLoading">Loading registration…</div>
-      <iframe id="regFrame" title="Testμ Conf '27 registration" src="about:blank"
-              referrerpolicy="no-referrer-when-downgrade"
-              allow="clipboard-write"></iframe>
-      <div class="frame-fallback" id="regFallback" hidden>
-        <h3>Registration opens on testmuai.com</h3>
-        <p>This form can't be displayed inside another page. Your place and everything that brought you here is carried straight over — nothing is lost.</p>
-        <a class="btn btn-coral" id="regFallbackLink" href="#" target="_blank" rel="noopener">Continue to registration ↗</a>
-      </div>
-    </div>
-  </div>
-</div>
-
 <script>
 (function () {
   "use strict";
@@ -663,7 +594,7 @@ a { color: inherit; }
       ],
       cta: {
         label: "Get your free boarding pass",
-        mode: "iframe",
+        mode: "newtab",
         url: TESTMU + "/testmuconf-2027/",
         event: "registration_opened"
       },
@@ -947,14 +878,9 @@ a { color: inherit; }
 
     var primary = $("primaryCta");
     primary.textContent = CFG.cta.label;
-    if (CFG.cta.mode === "iframe") {
-      primary.href = outbound(CFG.cta.url, "hero-primary");
-      primary.addEventListener("click", function (e) { e.preventDefault(); openRegistration(); });
-    } else {
-      primary.href = outbound(CFG.cta.url, "hero-primary");
-      primary.target = "_blank"; primary.rel = "noopener";
-      primary.addEventListener("click", function () { track(CFG.cta.event, { destination: CFG.cta.url }); });
-    }
+    primary.href = outbound(CFG.cta.url, "hero-primary");
+    primary.target = "_blank"; primary.rel = "noopener";
+    primary.addEventListener("click", function () { track(CFG.cta.event, { destination: CFG.cta.url }); });
 
     var secondary = $("secondaryCta");
     if (CFG.secondaryCta) {
@@ -1095,94 +1021,18 @@ a { color: inherit; }
   }
 
   /* ==========================================================================
-     5. REGISTRATION MODAL (iframe + graceful fallback)
-     ========================================================================== */
-
-  var modal = $("regModal"), frame = $("regFrame"), loading = $("regLoading"),
-      fallback = $("regFallback"), lastFocus = null, frameTimer = null, frameLoaded = false;
-
-  function openRegistration() {
-    var url = outbound(CFG.cta.url, "registration-modal");
-    lastFocus = document.activeElement;
-    $("regNewTab").href = url;
-    $("regFallbackLink").href = url;
-
-    frameLoaded = false;
-    fallback.hidden = true;
-    loading.hidden = false;
-    frame.hidden = false;
-    frame.src = url;
-
-    modal.hidden = false;
-    document.body.style.overflow = "hidden";
-    track("registration_opened", { mode: "iframe", destination: CFG.cta.url });
-
-    // If the frame never reports a load, embedding was refused — swap in the link.
-    clearTimeout(frameTimer);
-    frameTimer = setTimeout(function () { if (!frameLoaded) showFrameFallback("timeout"); }, 4500);
-
-    setTimeout(function () { $("regNewTab").focus(); }, 30);
-  }
-
-  function showFrameFallback(reason) {
-    loading.hidden = true;
-    frame.hidden = true;
-    fallback.hidden = false;
-    track("registration_frame_blocked", { reason: reason });
-  }
-
-  frame.addEventListener("load", function () {
-    if (frame.src === "about:blank") return;
-    frameLoaded = true;
-    loading.hidden = true;
-  });
-  frame.addEventListener("error", function () { showFrameFallback("error"); });
-
-  // A page-level CSP refusal (frame-ancestors) surfaces here in modern browsers.
-  window.addEventListener("securitypolicyviolation", function (e) {
-    if (e && e.violatedDirective && e.violatedDirective.indexOf("frame") !== -1) showFrameFallback("csp");
-  });
-
-  function closeRegistration() {
-    modal.hidden = true;
-    frame.src = "about:blank";
-    document.body.style.overflow = "";
-    clearTimeout(frameTimer);
-    if (lastFocus && lastFocus.focus) lastFocus.focus();
-  }
-
-  Array.prototype.forEach.call(modal.querySelectorAll("[data-close]"), function (el) {
-    el.addEventListener("click", closeRegistration);
-  });
-
-  document.addEventListener("keydown", function (e) {
-    if (modal.hidden) return;
-    if (e.key === "Escape") { closeRegistration(); return; }
-    if (e.key !== "Tab") return;
-    var f = modal.querySelectorAll('a[href], button:not([disabled]), iframe, [tabindex]:not([tabindex="-1"])');
-    if (!f.length) return;
-    var first = f[0], last = f[f.length - 1];
-    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-  });
-
-  // Optional non-PII completion signal from the TestMu success page.
-  window.addEventListener("message", function (e) {
-    if (e.origin !== "https://www.testmuai.com") return;
-    var d = e.data;
-    if (!d) return;
-    var type = (typeof d === "string") ? d : d.type;
-    if (type === "testmu:registration:complete" || type === "registration_complete") {
-      track("registration_completed", { source: "postmessage" });
-    }
-  }, false);
-
-  /* ==========================================================================
-     6. DOCKET EVENT CONCIERGE
+     5. DOCKET EVENT CONCIERGE
      The widget receives campaign context through Dynamic Context Ingestion.
      Only the derived, non-identifying envelope is passed — never raw UTMs,
      never the opaque ctx token, never CRM or account data.
      ========================================================================== */
+
+  var CTA_ID = {
+    registration: "boarding-pass",
+    archive:      "browse-archive",
+    learning:     "learning-paths",
+    explore:      "explore"
+  };
 
   function dciEnvelope() {
     return {
@@ -1191,7 +1041,7 @@ a { color: inherit; }
       event_topic:     PARAMS.event_topic || "",
       event_faq_set:   CFG.faqSet,
       campaign_source: PARAMS.utm_source || "direct",
-      campaign_cta:    PARAMS.event_cta || (CFG.cta.mode === "iframe" ? "boarding-pass" : "explore"),
+      campaign_cta:    PARAMS.event_cta || CTA_ID[CFG.phase] || "explore",
       visitor_intent:  PARAMS.intent || "unknown"
     };
   }
@@ -1222,7 +1072,7 @@ a { color: inherit; }
   }
 
   /* ==========================================================================
-     7. BOOT
+     6. BOOT
      ========================================================================== */
 
   attributeChrome();
