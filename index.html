@@ -263,17 +263,17 @@ a { color: inherit; }
 }
 .btn-outline-cream:hover { border-color: var(--cream); background: rgba(255,255,222,.07); }
 
-/* ============ CONCIERGE (the paper card) ============ */
-.concierge {
+/* ============ STARTING POINTS (the paper card) ============ */
+.points {
   position: relative;
   background: var(--paper);
   color: var(--ink);
-  padding: clamp(24px, 2.6vw, 38px);
+  padding: clamp(22px, 2.4vw, 34px);
   box-shadow: 0 30px 70px rgba(0,0,0,.45);
   border-radius: var(--radius);
 }
 /* taped corner, echoing the boarding-pass card */
-.concierge::before {
+.points::before {
   content: ""; position: absolute; top: -15px; right: -26px;
   width: 108px; height: 44px; transform: rotate(-19deg);
   background: linear-gradient(160deg, rgba(226,225,214,.95), rgba(168,166,156,.82) 46%, rgba(232,231,222,.92));
@@ -281,52 +281,51 @@ a { color: inherit; }
   opacity: .92;
 }
 /* perforation ticks down the left edge */
-.concierge::after {
+.points::after {
   content: ""; position: absolute; left: 10px; top: 26px; bottom: 26px; width: 3px;
   background: repeating-linear-gradient(180deg, var(--coral) 0 7px, transparent 7px 16px);
   opacity: .85;
 }
 
-.concierge-head { padding-left: 18px; }
-.concierge-kicker { color: rgba(19,19,19,.55); }
-.concierge-title {
+.points-head { padding-left: 18px; }
+.points-kicker { color: rgba(19,19,19,.55); }
+.points-title {
   font-family: var(--mono);
-  font-size: clamp(19px, 1.8vw, 25px);
+  font-size: clamp(18px, 1.7vw, 23px);
   font-weight: 700; letter-spacing: .01em; text-transform: uppercase;
   margin: 8px 0 0; line-height: 1.15;
 }
-.concierge-blurb { font-size: 14.5px; line-height: 1.6; color: rgba(19,19,19,.74); margin: 12px 0 0; }
+.points-lede { font-size: 14px; line-height: 1.6; color: rgba(19,19,19,.7); margin: 10px 0 0; }
 
-.concierge-opening {
-  margin: 20px 0 0 18px;
-  background: var(--paper-2);
-  border-left: 3px solid var(--coral);
-  padding: 15px 17px;
-  font-size: 15px; line-height: 1.55;
+.points-list { list-style: none; margin: 16px 0 0 18px; padding: 0; display: grid; gap: 9px; }
+.point {
+  display: flex; align-items: flex-start; gap: 13px;
+  text-decoration: none; color: var(--ink);
+  border: 1px solid rgba(19,19,19,.20); border-radius: var(--radius);
+  padding: 13px 14px;
+  transition: background .14s ease, border-color .14s ease, transform .14s ease;
 }
-.concierge-opening .who {
-  display: block; margin-bottom: 6px;
-  font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase;
-  color: rgba(19,19,19,.5);
+.point:hover { background: var(--paper-2); border-color: var(--ink); transform: translateX(2px); }
+.point-ico {
+  flex: 0 0 auto; width: 34px; height: 34px; display: grid; place-items: center;
+  background: var(--paper-2); border: 1px solid rgba(19,19,19,.12); border-radius: var(--radius);
 }
+.point-ico svg { width: 19px; height: 19px; display: block; }
+.point-body { min-width: 0; flex: 1 1 auto; }
+.point-tag {
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--coral-deep); margin: 0 0 3px;
+}
+.point-title { font-family: var(--display); font-size: 15.5px; font-weight: 600; letter-spacing: -.005em; margin: 0; line-height: 1.25; }
+.point-desc { font-size: 13px; line-height: 1.5; color: rgba(19,19,19,.66); margin: 4px 0 0; }
+.point-go { flex: 0 0 auto; align-self: center; color: var(--coral); font-family: var(--mono); font-size: 15px; line-height: 1; }
 
-.starters { list-style: none; margin: 16px 0 0 18px; padding: 0; display: grid; gap: 8px; }
-.starter {
-  width: 100%; text-align: left; cursor: pointer;
-  background: transparent; border: 1px solid rgba(19,19,19,.24);
-  border-radius: var(--radius);
-  padding: 13px 15px; font-family: var(--display); font-size: 14.5px; color: var(--ink);
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  transition: background .14s ease, border-color .14s ease;
+.points-foot {
+  margin: 16px 0 0 18px; padding-top: 14px; border-top: 1px dashed rgba(19,19,19,.22);
 }
-.starter:hover { background: var(--paper-2); border-color: var(--ink); }
-.starter .chev { color: var(--coral); font-family: var(--mono); flex: 0 0 auto; }
+.points-note { font-family: var(--mono); font-size: 10.5px; letter-spacing: .04em; color: rgba(19,19,19,.5); line-height: 1.5; margin: 0; }
 
-.concierge-foot {
-  margin: 20px 0 0 18px; padding-top: 16px; border-top: 1px dashed rgba(19,19,19,.22);
-  display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;
-}
-.concierge-note { font-family: var(--mono); font-size: 10.5px; letter-spacing: .04em; color: rgba(19,19,19,.5); max-width: 30ch; line-height: 1.5; }
+.hero-title.tight { font-size: clamp(27px, 4.1vw, 57px); letter-spacing: -.02em; }
 
 /* ================= SECTIONS ================= */
 .section { padding-block: clamp(56px, 7vw, 100px); }
@@ -429,8 +428,8 @@ a { color: inherit; }
 }
 @media (max-width: 900px) {
   .hero-in { grid-template-columns: minmax(0, 1fr); }
-  /* concierge sits immediately below the CTA on mobile */
-  .concierge { margin-top: 6px; }
+  /* the starting points sit immediately below the CTA on mobile */
+  .points { margin-top: 6px; }
   .factpill { width: 100%; }
   .fact { flex: 1 1 auto; }
   .modal-panel { height: 92vh; }
@@ -447,7 +446,7 @@ a { color: inherit; }
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
 
-@media print { .concierge, .masthead-cta, .modal { display: none !important; } }
+@media print { .masthead-cta, .modal { display: none !important; } }
 </style>
 </head>
 <body>
@@ -457,7 +456,7 @@ a { color: inherit; }
 <!-- ===================== HEADER ===================== -->
 <header class="masthead">
   <div class="wrap masthead-in">
-    <a class="brand" href="https://www.testmuai.com/" data-track="nav_home">
+    <a class="brand" href="https://www.testmuai.com/" data-out="nav-home" data-track="nav_home">
       <svg class="brand-mark" viewBox="0 0 22 24" aria-hidden="true">
         <rect x="0" y="2" width="3.6" height="20" rx="1" fill="#131313"/>
         <rect x="6.4" y="2" width="3.6" height="9" rx="1" fill="#131313"/>
@@ -471,15 +470,11 @@ a { color: inherit; }
       </span>
     </a>
     <nav class="nav" aria-label="Primary">
-      <a href="https://www.testmuai.com/">Platform</a>
-      <a href="https://www.testmuai.com/">Solutions</a>
-      <a href="https://www.testmuai.com/">Resources</a>
-      <a href="https://www.testmuai.com/">AI Agents</a>
-      <a href="https://www.testmuai.com/pricing/">Pricing</a>
+      <a href="https://www.testmuai.com/" data-out="nav-platform">Platform</a>
     </nav>
     <div class="masthead-cta">
-      <a class="btn btn-ghost" href="https://www.testmuai.com/" data-track="nav_demo">Book a Demo</a>
-      <a class="btn btn-ink" href="https://www.testmuai.com/" data-track="nav_start">Get Started Free</a>
+      <a class="btn btn-ghost" href="https://www.testmuai.com/" data-out="nav-demo" data-track="nav_demo">Book a Demo</a>
+      <a class="btn btn-ink" href="https://www.testmuai.com/" data-out="nav-start" data-track="nav_start">Get Started Free</a>
     </div>
   </div>
 </header>
@@ -513,38 +508,20 @@ a { color: inherit; }
         </div>
       </div>
 
-      <!-- ============ Event Concierge ============ -->
-      <aside class="concierge" id="concierge" aria-labelledby="conciergeTitle">
-        <div class="concierge-head">
-          <p class="label concierge-kicker" id="conciergeKicker">TestMu Events</p>
-          <h2 class="concierge-title" id="conciergeTitle">Your Event Guide</h2>
-          <p class="concierge-blurb" id="conciergeBlurb">A TestMu guide who knows this event — ask anything, or pick a starting point.</p>
+      <!-- ============ Starting points ============ -->
+      <aside class="points" id="points" aria-labelledby="pointsTitle">
+        <div class="points-head">
+          <p class="label points-kicker" id="pointsKicker">TestMu Events</p>
+          <h2 class="points-title" id="pointsTitle">Pick your starting point</h2>
+          <p class="points-lede" id="pointsLede"></p>
         </div>
 
-        <div class="concierge-opening">
-          <span class="who">Event Guide</span>
-          <span id="conciergeOpening"></span>
-        </div>
+        <ul class="points-list" id="pointsList"></ul>
 
-        <ul class="starters" id="starters" aria-label="Suggested starting points"></ul>
-
-        <div class="concierge-foot">
-          <p class="concierge-note">No sign-in needed. Browsing and reading never creates a record.</p>
-          <button class="btn btn-ink" id="openConcierge" type="button">Ask the guide</button>
+        <div class="points-foot">
+          <p class="points-note" id="pointsNote">Every link carries your place with it. Browsing and reading never creates a record.</p>
         </div>
       </aside>
-    </div>
-  </section>
-
-  <!-- ===================== RESOURCES ===================== -->
-  <section class="section section-paper" id="resources" aria-labelledby="resTitle">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="label section-kicker" id="resKicker">Start here</p>
-        <h2 class="section-title" id="resTitle">Worth your time</h2>
-        <p class="section-lede" id="resLede"></p>
-      </div>
-      <div class="cards" id="resourceCards"></div>
     </div>
   </section>
 
@@ -565,7 +542,7 @@ a { color: inherit; }
 <!-- ===================== FOOTER ===================== -->
 <footer class="foot">
   <div class="wrap foot-in">
-    <a class="brand" href="https://www.testmuai.com/" style="text-decoration:none">
+    <a class="brand" href="https://www.testmuai.com/" data-out="foot-home" style="text-decoration:none">
       <svg class="brand-mark" viewBox="0 0 22 24" aria-hidden="true">
         <rect x="0" y="2" width="3.6" height="20" rx="1" fill="#FFFFDE"/>
         <rect x="6.4" y="2" width="3.6" height="9" rx="1" fill="#FFFFDE"/>
@@ -578,13 +555,7 @@ a { color: inherit; }
         <span class="brand-sub">Formerly LambdaTest</span>
       </span>
     </a>
-    <nav class="foot-links" aria-label="Footer">
-      <a href="https://www.testmuai.com/testmuconf-2027/">Testμ Conf '27</a>
-      <a href="https://www.testmuai.com/testmuconf-2026/">Conf '26 Archive</a>
-      <a href="https://www.testmuai.com/bootcamp/">Bootcamp</a>
-      <a href="https://www.testmuai.com/support/docs/">Docs</a>
-      <a href="https://www.testmuai.com/">Privacy</a>
-    </nav>
+    <nav class="foot-links" id="footLinks" aria-label="Footer"></nav>
     <p class="foot-fine">© <span id="year"></span> TestMu AI. Event pages for TestMu conferences, replays and certifications.</p>
   </div>
 </footer>
@@ -629,12 +600,58 @@ a { color: inherit; }
 
   var TESTMU = "https://www.testmuai.com";
 
+  /* Inline glyphs for the starting-point rows. Coral, to match the page's accent. */
+  var ICO = {
+    conf: '<svg viewBox="0 0 24 24" fill="none" stroke="#FF4F4A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/><circle cx="12" cy="15" r="2.1" fill="#FF4F4A" stroke="none"/></svg>',
+    play: '<svg viewBox="0 0 24 24" fill="none" stroke="#FF4F4A" stroke-width="1.6" stroke-linejoin="round"><circle cx="12" cy="12" r="9.2"/><path d="M10 8.4l6 3.6-6 3.6z" fill="#FF4F4A" stroke="none"/></svg>',
+    cert: '<svg viewBox="0 0 24 24" fill="none" stroke="#FF4F4A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9.2" r="5.6"/><path d="M8.4 13.8L7 21.5l5-2.6 5 2.6-1.4-7.7"/></svg>',
+    docs: '<svg viewBox="0 0 24 24" fill="none" stroke="#FF4F4A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.6h6a3 3 0 013 3v11.8a2.4 2.4 0 00-2.4-2.4H4z"/><path d="M20 4.6h-6a3 3 0 00-3 3v11.8a2.4 2.4 0 012.4-2.4H20z"/></svg>',
+    kaneai: '<svg viewBox="0 0 24 24" fill="none" stroke="#FF4F4A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.8l2.1 5.6 5.6 2.1-5.6 2.1L12 18.2l-2.1-5.6-5.6-2.1 5.6-2.1z"/><path d="M18.6 16.4l.9 2.3 2.3.9-2.3.9-.9 2.3-.9-2.3-2.3-.9 2.3-.9z"/></svg>',
+    hyperexecute: '<svg viewBox="0 0 24 24" fill="none" stroke="#FF4F4A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13.4 2.5L4.6 13.4h5.5l-.9 8.1 8.8-10.9h-5.5z"/></svg>',
+    automation: '<svg viewBox="0 0 24 24" fill="none" stroke="#FF4F4A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.1"/><path d="M12 2.6v3M12 18.4v3M2.6 12h3M18.4 12h3M5.4 5.4l2.1 2.1M16.5 16.5l2.1 2.1M18.6 5.4l-2.1 2.1M7.5 16.5l-2.1 2.1"/></svg>',
+    manual: '<svg viewBox="0 0 24 24" fill="none" stroke="#FF4F4A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="3.2" width="15" height="17.6" rx="2"/><path d="M8.4 8.6h7.2M8.4 12.4h7.2M8.4 16.2h4.4"/></svg>'
+  };
+
+  /* The four TestMu event motions. Switching program keeps every inbound
+     parameter on the URL — see internalHref(). */
+  var EVENT_POINTS = [
+    { id: "conf-2027", ico: "conf", tag: "Upcoming", title: "Test&mu; Conf &rsquo;27",
+      desc: "August 24&ndash;26, virtual and global. Free to attend &mdash; get your boarding pass.",
+      url: "?event_program=testmuconf-2027&event_phase=registration" },
+    { id: "conf-2026", ico: "play", tag: "On demand", title: "Test&mu; Conf &rsquo;26 archive",
+      desc: "Every session from last year&rsquo;s conference, recorded and free to watch.",
+      url: "?event_program=testmuconf-2026&event_phase=archive" },
+    { id: "learning", ico: "cert", tag: "Skills", title: "Bootcamps &amp; certifications",
+      desc: "Self-paced paths ending in a verifiable TestMu certification.",
+      url: "?event_program=testmu-learning&event_phase=learning" },
+    { id: "docs", ico: "docs", tag: "Reference", title: "Product documentation",
+      desc: "Reference material for the TestMu platform and its integrations.",
+      url: TESTMU + "/support/docs/" }
+  ];
+
+  /* The four live certification tracks. Real destinations, attributed. */
+  var CERTS = [
+    { id: "cert-kaneai", ico: "kaneai", tag: "Certification", title: "KaneAI",
+      desc: "Validate your expertise in AI-native test authoring and agentic test automation.",
+      url: TESTMU + "/certifications/kaneai/" },
+    { id: "cert-hyperexecute", ico: "hyperexecute", tag: "Certification", title: "HyperExecute",
+      desc: "End-to-end orchestration and running suites at speed on HyperExecute.",
+      url: TESTMU + "/certifications/hyperexecute/" },
+    { id: "cert-automation", ico: "automation", tag: "Certification", title: "Automation Testing",
+      desc: "For engineers building a career in automated testing &mdash; frameworks, CI and coverage.",
+      url: TESTMU + "/certifications/automation-testing/" },
+    { id: "cert-manual", ico: "manual", tag: "Certification", title: "Manual Testing",
+      desc: "Advanced, hands-on craft for manual testing professionals.",
+      url: TESTMU + "/certifications/manual-testing/" }
+  ];
+
   var CAMPAIGNS = {
 
-    /* ---------------- Testμ Conf '27 — registration ---------------- */
+    /* ---------------- Test&mu; Conf '27 — registration ---------------- */
     "testmuconf-2027": {
       faqSet: "conf-2027-v1",
       phase: "registration",
+      docTitle: "Testμ Conf '27 — TestMu AI Events",
       eyebrow: "Testmu-Conf 2027",
       titleHtml: 'TEST<span class="accent">μ</span><br>C<span class="star" data-star></span>NF&rsquo;27',
       sub: "World's largest virtual agentic engineering &amp; quality conference",
@@ -651,27 +668,11 @@ a { color: inherit; }
         event: "registration_opened"
       },
       secondaryCta: { label: "Watch Conf '26 sessions", url: TESTMU + "/testmuconf-2026/" },
-      concierge: {
-        kicker: "Conf '27 Concierge",
-        title: "Plan your Conf '27",
-        blurb: "A TestMu guide who knows the agenda. Ask about tracks, timing or the format — or get registered in a minute.",
-        opening: "There's a lot on the Conf '27 agenda. Tell me what you're building and testing, and I'll point you at the sessions actually worth blocking time for.",
-        starters: [
-          "Which sessions fit my stack?",
-          "What time zone do the sessions run in?",
-          "Will the talks be recorded?"
-        ]
-      },
-      resources: {
-        kicker: "Before you go",
-        title: "Get the most out of Conf '27",
-        lede: "Pick your tracks, see who's speaking, and catch up on last year before the doors open.",
-        cards: [
-          { tag: "Agenda",     title: "Tracks and sessions",        desc: "Agentic engineering, AI-assisted testing, quality at scale, and hands-on workshops across three days.", url: TESTMU + "/testmuconf-2027/" },
-          { tag: "Speakers",   title: "Who you'll hear from",       desc: "Engineering and quality leaders from across the industry, plus practitioners shipping this work today.", url: TESTMU + "/testmuconf-2027/" },
-          { tag: "On demand",  title: "Testμ Conf '26 replay",      desc: "Every session from last year's conference, free to watch while you wait for '27.", url: TESTMU + "/testmuconf-2026/" },
-          { tag: "Skills",     title: "Bootcamp &amp; certifications", desc: "Turn what you learn at the conference into a credential your team can see.", url: TESTMU + "/bootcamp/" }
-        ]
+      points: {
+        kicker: "TestMu Events",
+        title: "Pick your starting point",
+        lede: "Everything TestMu runs, in one place. Take whichever one you came for.",
+        items: EVENT_POINTS
       },
       faqs: [
         { q: "When is Testμ Conf '27 and how long does it run?", a: "August 24–26. Three consecutive days of sessions, with the programme spread across the day so people in different regions can catch live content." },
@@ -685,10 +686,11 @@ a { color: inherit; }
       ]
     },
 
-    /* ---------------- Testμ Conf '26 — archive follow-up ---------------- */
+    /* ---------------- Test&mu; Conf '26 — archive follow-up ---------------- */
     "testmuconf-2026": {
       faqSet: "conf-2026-v1",
       phase: "archive",
+      docTitle: "Testμ Conf '26 archive — TestMu AI Events",
       eyebrow: "Testmu-Conf 2026 · On demand",
       titleHtml: 'TEST<span class="accent">μ</span><br>C<span class="star" data-star></span>NF&rsquo;26',
       sub: "Every session, talk and workshop — on demand",
@@ -705,34 +707,18 @@ a { color: inherit; }
         event: "archive_opened"
       },
       secondaryCta: { label: "See what's coming in '27", url: TESTMU + "/testmuconf-2027/" },
-      concierge: {
-        kicker: "Conf '26 Concierge",
-        title: "Find the session you need",
-        blurb: "Tell the guide what you're working on and it will point you at the recordings that actually address it.",
-        opening: "The '26 archive is big. Tell me what you're working on right now — a flaky suite, slow CI, an accessibility audit — and I'll point you at the sessions that address it.",
-        starters: [
-          "Show me sessions on AI-assisted testing",
-          "What covered CI speed and flakiness?",
-          "Where do I find the recordings?"
-        ]
-      },
-      resources: {
-        kicker: "In the archive",
-        title: "Where people usually start",
-        lede: "Four entry points into the Conf '26 recordings, depending on what you came for.",
-        cards: [
-          { tag: "Archive",   title: "All Conf '26 sessions",   desc: "The complete recorded programme — keynotes, tracks and workshops, free to watch.", url: TESTMU + "/testmuconf-2026/" },
-          { tag: "Next up",   title: "Testμ Conf '27",          desc: "August 24–26, virtual and free. Register now so you catch the next one live.", url: TESTMU + "/testmuconf-2027/" },
-          { tag: "Skills",    title: "Bootcamp &amp; certifications", desc: "Go from watching a session to holding a certification your team can verify.", url: TESTMU + "/bootcamp/" },
-          { tag: "Docs",      title: "Put it into practice",    desc: "Product documentation for the tooling the sessions demonstrate.", url: TESTMU + "/support/docs/" }
-        ]
+      points: {
+        kicker: "TestMu Events",
+        title: "Pick your starting point",
+        lede: "Everything TestMu runs, in one place. Take whichever one you came for.",
+        items: EVENT_POINTS
       },
       faqs: [
         { q: "Where do I find the Conf '26 recordings?", a: "They live on the Testμ Conf '26 page on testmuai.com. Everything is free and nothing is gated behind a second form — the archive button on this page takes you straight there." },
-        { q: "How do I find a specific session?", a: "The archive is organised by day and track. If you know the speaker or the topic, the guide on this page can narrow it down for you faster than scrolling — just describe what you're after." },
-        { q: "I only have an hour. What should I watch?", a: "Tell the guide what you're working on and it will pick a short path rather than handing you the full list. Most people get more out of two targeted sessions than a keynote they half-watch." },
-        { q: "Are there topic paths rather than single talks?", a: "Yes — sessions cluster into themes like AI-assisted test creation, CI speed and orchestration, cross-browser and real-device coverage, visual regression, and accessibility. The guide can walk you through a theme end to end." },
-        { q: "Do I get a certificate for watching?", a: "Watching the archive doesn't carry a credential. Certifications come through TestMu's bootcamp and certification programme, which is a separate track — linked above." },
+        { q: "How do I find a specific session?", a: "The archive is organised by day and track. If you know the speaker or the topic, the event assistant on this page can narrow it down faster than scrolling — just describe what you're after." },
+        { q: "I only have an hour. What should I watch?", a: "Say what you're working on and the assistant will pick a short path rather than handing you the full list. Most people get more out of two targeted sessions than a keynote they half-watch." },
+        { q: "Are there topic paths rather than single talks?", a: "Yes — sessions cluster into themes like AI-assisted test creation, CI speed and orchestration, cross-browser and real-device coverage, visual regression, and accessibility." },
+        { q: "Do I get a certificate for watching?", a: "Watching the archive doesn't carry a credential. Certifications come through TestMu's bootcamp and certification tracks, which are a separate path — pick Bootcamps &amp; certifications above." },
         { q: "When is the next conference?", a: "Testμ Conf '27 runs August 24–26, virtual and free. Registration is open now, and it's the same boarding-pass form as always." }
       ]
     },
@@ -741,10 +727,12 @@ a { color: inherit; }
     "testmu-learning": {
       faqSet: "learning-v1",
       phase: "learning",
+      docTitle: "Bootcamps & certifications — TestMu AI Events",
       eyebrow: "Testmu Learning",
-      titleHtml: 'B<span class="star" data-star></span><span class="accent">O</span>TCAMPS<br>&amp; CERTS',
+      titleHtml: 'B<span class="star" data-star></span><span class="accent">O</span>TCAMPS<br>&amp;&nbsp;CERTIFICATI<span class="accent">O</span>NS',
+      titleClass: "tight",
       sub: "Build AI-native testing skills that hold up in production",
-      lede: "Structured paths that take you from a working knowledge of a framework to a certification your team — and your next employer — can actually verify.",
+      lede: "Four certification tracks that take you from working knowledge of a framework to a credential your team — and your next employer — can actually verify.",
       facts: [
         { k: "Format", v: "Self-paced" },
         { k: "Where",  v: "Online" },
@@ -757,34 +745,20 @@ a { color: inherit; }
         event: "learning_opened"
       },
       secondaryCta: { label: "Watch Conf '26 sessions", url: TESTMU + "/testmuconf-2026/" },
-      concierge: {
-        kicker: "Learning Concierge",
-        title: "Pick the right path",
-        blurb: "There are several paths and they don't all suit the same person. The guide helps you choose one and tells you what it assumes you already know.",
-        opening: "Are you picking up a new skill yourself, or getting a team to a shared baseline? The answer changes which path I'd point you at.",
-        starters: [
-          "Which path should I start with?",
-          "What do I need to know first?",
-          "Can I certify a whole team?"
-        ]
-      },
-      resources: {
-        kicker: "Paths",
-        title: "Where to begin",
-        lede: "Four ways in, depending on whether you're building your own skills or levelling up a team.",
-        cards: [
-          { tag: "Bootcamp",      title: "Certification paths",    desc: "Structured, self-paced courses ending in a verifiable TestMu certification.", url: TESTMU + "/bootcamp/" },
-          { tag: "Foundations",   title: "Automation fundamentals", desc: "Selenium, Cypress and Appium from the ground up, for people new to automated testing.", url: TESTMU + "/bootcamp/" },
-          { tag: "Docs",          title: "Product documentation",   desc: "Reference material for everything the courses demonstrate hands-on.", url: TESTMU + "/support/docs/" },
-          { tag: "Community",     title: "Conf '26 sessions",       desc: "Conference talks that pair well with the courses — free and on demand.", url: TESTMU + "/testmuconf-2026/" }
-        ]
+      points: {
+        kicker: "Certification tracks",
+        title: "Choose your certification",
+        lede: "Four tracks, each ending in a TestMu certification that can be shared and verified.",
+        items: CERTS
       },
       faqs: [
-        { q: "Which learning path should I start with?", a: "It depends on what you already do day to day. If you write automated tests, the framework-specific paths are the fastest win; if you're moving into quality from development or manual testing, start with the fundamentals. The guide on this page can narrow it to one." },
-        { q: "What do the courses assume I already know?", a: "The fundamentals paths assume no automation background — just comfort with a codebase. Framework and advanced paths assume you've written tests before and know your way around a CI pipeline." },
-        { q: "Do I get a certification at the end?", a: "Yes. The bootcamp paths end in a TestMu certification that can be shared and verified, rather than a completion badge with nothing behind it." },
-        { q: "How long does a path take?", a: "They're self-paced, so it's up to you. Most people work through a path over a few weeks alongside their normal work rather than in one sitting." },
-        { q: "Can I put a whole team through this?", a: "Yes — teams commonly use the paths to get everyone to the same baseline before rolling out new tooling. If that's what you're planning, say so to the guide and it can get the right person to talk it through with you." },
+        { q: "Which of the four certifications should I start with?", a: "If you already write automated tests, KaneAI or HyperExecute are the fastest wins. If you're moving into automation, start with Automation Testing. If your craft is exploratory and manual work, Manual Testing goes deeper than most people expect." },
+        { q: "What does the KaneAI certification cover?", a: "AI-native test authoring — describing intent in plain language, reviewing what the agent produces, and maintaining suites built that way." },
+        { q: "What does the HyperExecute certification cover?", a: "End-to-end orchestration: running suites at speed, splitting and parallelising work, and wiring the results back into a pipeline." },
+        { q: "What do the tracks assume I already know?", a: "Automation Testing and Manual Testing assume no prior automation background — just comfort with how software gets built. KaneAI and HyperExecute assume you've written tests before and know your way around a CI pipeline." },
+        { q: "Do I get something verifiable at the end?", a: "Yes. Each track ends in a TestMu certification that can be shared and checked, rather than a completion badge with nothing behind it." },
+        { q: "How long does a track take?", a: "They're self-paced. Most people work through one over a few weeks alongside their normal work rather than in one sitting." },
+        { q: "Can I put a whole team through this?", a: "Yes — teams commonly use the tracks to get everyone to the same baseline before rolling out new tooling. Say so to the assistant on this page and it can get the right person to talk it through with you." },
         { q: "Does this cost anything?", a: "The learning paths are free to start. Anything that isn't is stated clearly on the bootcamp page before you commit." }
       ]
     },
@@ -793,8 +767,10 @@ a { color: inherit; }
     "_default": {
       faqSet: "events-general-v1",
       phase: "explore",
+      docTitle: "TestMu AI — Events",
       eyebrow: "Testmu Events",
-      titleHtml: 'EXPL<span class="star" data-star></span>RE<br>TEST<span class="accent">μ</span> EVENTS',
+      titleHtml: 'EXPL<span class="star" data-star></span>RE<br>TEST<span class="accent">μ</span>&nbsp;EVENTS',
+      titleClass: "tight",
       sub: "Conferences, replays and certifications for AI-native quality",
       lede: "Three ways in: register for the next conference, catch up on the last one, or pick up a certification. Take whichever one you came for.",
       facts: [],
@@ -805,32 +781,17 @@ a { color: inherit; }
         event: "explore_cta"
       },
       secondaryCta: { label: "Browse Conf '26 archive", url: TESTMU + "/testmuconf-2026/" },
-      concierge: {
+      points: {
         kicker: "TestMu Events",
-        title: "Your event guide",
-        blurb: "Not sure which of these you need? Say what you're after and the guide will get you to the right place.",
-        opening: "Looking for the next conference, a session you missed, or a certification? Tell me which and I'll take you straight there.",
-        starters: [
-          "When is the next Testμ Conf?",
-          "I missed a session last year",
-          "I want a certification"
-        ]
-      },
-      resources: {
-        kicker: "Three ways in",
         title: "Pick your starting point",
-        lede: "Every TestMu event motion in one place.",
-        cards: [
-          { tag: "Upcoming",  title: "Testμ Conf '27",        desc: "August 24–26, virtual and global. Free to attend — get your boarding pass.", url: "?event_program=testmuconf-2027&amp;event_phase=registration" },
-          { tag: "On demand", title: "Testμ Conf '26 archive", desc: "Every session from last year's conference, recorded and free to watch.", url: "?event_program=testmuconf-2026&amp;event_phase=archive" },
-          { tag: "Skills",    title: "Bootcamp &amp; certifications", desc: "Self-paced paths ending in a verifiable TestMu certification.", url: "?event_program=testmu-learning&amp;event_phase=learning" },
-          { tag: "Docs",      title: "Product documentation",  desc: "Reference material for the TestMu platform and its integrations.", url: TESTMU + "/support/docs/" }
-        ]
+        lede: "Everything TestMu runs, in one place. Take whichever one you came for.",
+        items: EVENT_POINTS
       },
       faqs: [
         { q: "What is Testμ Conf?", a: "TestMu's annual virtual conference on agentic engineering and quality — built with the testing community, free to attend, and global. The next edition runs August 24–26." },
         { q: "Can I still watch last year's sessions?", a: "Yes. The Conf '26 programme is recorded in full and free to watch on demand. Nothing is gated." },
-        { q: "What's the difference between the conference and the bootcamp?", a: "The conference is three days of talks and community sessions. The bootcamp is a self-paced learning track that ends in a certification. People often do both — the conference for what's changing, the bootcamp for the skill itself." },
+        { q: "What's the difference between the conference and the certifications?", a: "The conference is three days of talks and community sessions. The certification tracks are self-paced and end in a credential. People often do both — the conference for what's changing, a track for the skill itself." },
+        { q: "Which certifications are available?", a: "Four: KaneAI, HyperExecute, Automation Testing and Manual Testing. Pick Bootcamps &amp; certifications above to see them side by side." },
         { q: "Does any of this cost money?", a: "The conference is free and the learning paths are free to start. Anything that carries a cost says so on its own page before you commit." }
       ]
     }
@@ -854,11 +815,15 @@ a { color: inherit; }
      2. URL CONTEXT
      ========================================================================== */
 
-  var PUBLIC_PARAMS = [
-    "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term",
-    "event_program", "event_phase", "event_topic", "event_content", "event_cta",
-    "intent", "ctx"
-  ];
+  var UTM_PARAMS   = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
+  var EVENT_PARAMS = ["event_program", "event_phase", "event_topic", "event_content", "event_cta", "intent", "ctx"];
+  var PUBLIC_PARAMS = UTM_PARAMS.concat(EVENT_PARAMS);
+
+  /* Docket attribution. Every outbound TestMu link carries these so the
+     traffic this page sends is credited back to the Docket event assistant.
+     The inbound campaign's own utm_* values are preserved alongside, under
+     src_* keys, so the original source is never lost. */
+  var DOCKET = { source: "docketai", medium: "event-concierge", agent: "kane-campaign-concierge" };
 
   function clean(v) {
     if (typeof v !== "string") return "";
@@ -888,6 +853,31 @@ a { color: inherit; }
   var PARAMS = readParams();
   var MATCH = resolveCampaign(PARAMS);
   var CFG = CAMPAIGNS[MATCH.key];
+  var CAMPAIGN_ID = MATCH.resolved ? MATCH.key : "testmu-events";
+
+  /* Make the page's own context explicit on the URL, so the assistant is always
+     primed with an event program and any link shared onwards keeps it. A motion
+     that resolved (including via an alias) is written back in canonical form; a
+     missing or unrecognised one becomes `explore`. Inbound utm_* are untouched. */
+  function seedProgramParams() {
+    var program = MATCH.resolved ? MATCH.key : "explore";
+    var phase   = MATCH.resolved ? (PARAMS.event_phase || CFG.phase) : "explore";
+
+    PARAMS.event_program = program;
+    PARAMS.event_phase   = phase;
+    if (!PARAMS.utm_source)   PARAMS.utm_source   = "direct";
+    if (!PARAMS.utm_medium)   PARAMS.utm_medium   = "event-page";
+    if (!PARAMS.utm_campaign) PARAMS.utm_campaign = CAMPAIGN_ID;
+
+    try {
+      var u = new URL(window.location.href);
+      u.searchParams.set("event_program", program);
+      u.searchParams.set("event_phase", phase);
+      if (!u.searchParams.get("utm_campaign")) u.searchParams.set("utm_campaign", CAMPAIGN_ID);
+      window.history.replaceState({}, "", u.toString());
+    } catch (e) {}
+  }
+  seedProgramParams();
 
   /* ==========================================================================
      3. ANALYTICS
@@ -938,6 +928,7 @@ a { color: inherit; }
   function renderHero() {
     text($("heroEyebrow"), CFG.eyebrow);
     $("heroTitle").innerHTML = CFG.titleHtml;
+    $("heroTitle").className = "hero-title" + (CFG.titleClass ? " " + CFG.titleClass : "");
     Array.prototype.forEach.call($("heroTitle").querySelectorAll("[data-star]"), function (n) { n.innerHTML = STAR_SVG; });
     $("heroSub").innerHTML = CFG.sub;
     text($("heroLede"), CFG.lede);
@@ -957,10 +948,10 @@ a { color: inherit; }
     var primary = $("primaryCta");
     primary.textContent = CFG.cta.label;
     if (CFG.cta.mode === "iframe") {
-      primary.href = withParams(CFG.cta.url);
+      primary.href = outbound(CFG.cta.url, "hero-primary");
       primary.addEventListener("click", function (e) { e.preventDefault(); openRegistration(); });
     } else {
-      primary.href = withParams(CFG.cta.url);
+      primary.href = outbound(CFG.cta.url, "hero-primary");
       primary.target = "_blank"; primary.rel = "noopener";
       primary.addEventListener("click", function () { track(CFG.cta.event, { destination: CFG.cta.url }); });
     }
@@ -968,77 +959,105 @@ a { color: inherit; }
     var secondary = $("secondaryCta");
     if (CFG.secondaryCta) {
       secondary.textContent = CFG.secondaryCta.label;
-      secondary.href = withParams(CFG.secondaryCta.url);
+      secondary.href = outbound(CFG.secondaryCta.url, "hero-secondary");
       secondary.target = "_blank"; secondary.rel = "noopener";
       secondary.hidden = false;
       secondary.addEventListener("click", function () { track("secondary_cta_clicked", { destination: CFG.secondaryCta.url }); });
     }
   }
 
-  /* Carry attribution forward onto TestMu-owned destinations only. */
-  function withParams(url) {
+  /* Every outbound TestMu destination is attributed to Docket and keeps the
+     inbound campaign context. `contentId` identifies which element sent them. */
+  function outbound(url, contentId) {
     if (!url) return "#";
-    if (url.charAt(0) === "?") return url;                       // internal campaign switch
-    if (url.indexOf("https://www.testmuai.com") !== 0) return url;
+    if (url.charAt(0) === "?") return internalHref(url);
     var u;
-    try { u = new URL(url); } catch (e) { return url; }
-    for (var i = 0; i < PUBLIC_PARAMS.length; i++) {
-      var k = PUBLIC_PARAMS[i];
-      if (PARAMS[k]) u.searchParams.set(k, PARAMS[k]);
-    }
+    try { u = new URL(url, window.location.href); } catch (e) { return url; }
+    if (u.hostname.indexOf("testmuai.com") === -1) return u.toString();
+
+    UTM_PARAMS.forEach(function (k) { if (PARAMS[k]) u.searchParams.set("src_" + k, PARAMS[k]); });
+    EVENT_PARAMS.forEach(function (k) { if (PARAMS[k]) u.searchParams.set(k, PARAMS[k]); });
+
+    u.searchParams.set("utm_source", DOCKET.source);
+    u.searchParams.set("utm_medium", DOCKET.medium);
+    u.searchParams.set("utm_campaign", CAMPAIGN_ID);
+    u.searchParams.set("utm_content", contentId || "link");
+    u.searchParams.set("ref", DOCKET.source);
+    u.searchParams.set("docket_agent", DOCKET.agent);
     return u.toString();
   }
 
-  function renderConcierge() {
-    var c = CFG.concierge;
-    text($("conciergeKicker"), c.kicker);
-    text($("conciergeTitle"), c.title);
-    $("conciergeBlurb").innerHTML = c.blurb;
-    text($("conciergeOpening"), c.opening);
+  /* Switching motion on this page keeps every parameter already on the URL. */
+  function internalHref(q) {
+    var u, add, out;
+    try {
+      u = new URL(window.location.href);
+      add = new URLSearchParams(q.charAt(0) === "?" ? q.slice(1) : q);
+    } catch (e) { return q; }
+    add.forEach(function (v, k) { u.searchParams.set(k, v); });
+    out = u.searchParams.toString();
+    return u.pathname + (out ? "?" + out : "");
+  }
 
-    var list = $("starters");
-    c.starters.forEach(function (s, idx) {
-      var li = document.createElement("li");
-      var b = document.createElement("button");
-      b.type = "button"; b.className = "starter";
-      var span = document.createElement("span"); span.textContent = s;
-      var chev = document.createElement("span"); chev.className = "chev"; chev.textContent = "→"; chev.setAttribute("aria-hidden", "true");
-      b.appendChild(span); b.appendChild(chev);
-      b.addEventListener("click", function () {
-        track("agent_starter_selected", { starter_index: idx + 1, starter: s });
-        openConcierge(s);
-      });
-      li.appendChild(b); list.appendChild(li);
+  /* Header, masthead buttons and footer all carry attribution too. */
+  var FOOT_LINKS = [
+    { id: "foot-conf-2027", label: "Test\u03BC Conf \u201927", url: TESTMU + "/testmuconf-2027/" },
+    { id: "foot-conf-2026", label: "Conf \u201926 Archive",     url: TESTMU + "/testmuconf-2026/" },
+    { id: "foot-bootcamp",  label: "Bootcamp",                 url: TESTMU + "/bootcamp/" },
+    { id: "foot-docs",      label: "Docs",                     url: TESTMU + "/support/docs/" },
+    { id: "foot-privacy",   label: "Privacy",                  url: TESTMU + "/" }
+  ];
+
+  function attributeChrome() {
+    Array.prototype.forEach.call(document.querySelectorAll("[data-out]"), function (a) {
+      a.href = outbound(a.getAttribute("href"), a.getAttribute("data-out"));
+      a.target = "_blank"; a.rel = "noopener";
     });
-
-    $("openConcierge").addEventListener("click", function () {
-      track("agent_opened", { source: "concierge_button" });
-      openConcierge(null);
+    var host = $("footLinks");
+    if (!host) return;
+    FOOT_LINKS.forEach(function (l) {
+      var a = document.createElement("a");
+      a.href = outbound(l.url, l.id);
+      a.target = "_blank"; a.rel = "noopener";
+      a.textContent = l.label;
+      a.addEventListener("click", function () { track("footer_link_clicked", { link: l.id }); });
+      host.appendChild(a);
     });
   }
 
-  function renderResources() {
-    var r = CFG.resources;
-    text($("resKicker"), r.kicker);
-    $("resTitle").innerHTML = r.title;
-    text($("resLede"), r.lede);
+  function renderPoints() {
+    var p = CFG.points;
+    text($("pointsKicker"), p.kicker);
+    text($("pointsTitle"), p.title);
+    text($("pointsLede"), p.lede);
 
-    var host = $("resourceCards");
-    r.cards.forEach(function (card) {
+    var host = $("pointsList");
+    p.items.forEach(function (item) {
+      var isInternal = item.url.charAt(0) === "?";
+      var li = document.createElement("li");
       var a = document.createElement("a");
-      a.className = "card";
-      var isInternal = card.url.charAt(0) === "?";
-      a.href = isInternal ? card.url.replace(/&amp;/g, "&") : withParams(card.url);
+      a.className = "point";
+      a.href = isInternal ? internalHref(item.url) : outbound(item.url, item.id);
       if (!isInternal) { a.target = "_blank"; a.rel = "noopener"; }
 
-      var tag = document.createElement("p"); tag.className = "label card-tag"; tag.innerHTML = card.tag;
-      var t = document.createElement("h3"); t.className = "card-title"; t.innerHTML = card.title;
-      var d = document.createElement("p"); d.className = "card-desc"; d.innerHTML = card.desc;
-      var g = document.createElement("span"); g.className = "card-go"; g.textContent = isInternal ? "Switch" : "Open";
+      var ico = document.createElement("span");
+      ico.className = "point-ico"; ico.setAttribute("aria-hidden", "true");
+      ico.innerHTML = ICO[item.ico] || ICO.docs;
 
-      a.appendChild(tag); a.appendChild(t); a.appendChild(d); a.appendChild(g);
-      a.addEventListener("click", function () { track("resource_clicked", { resource: a.querySelector(".card-title").textContent }); });
-      host.appendChild(a);
+      var body = document.createElement("span"); body.className = "point-body";
+      var tag = document.createElement("span"); tag.className = "point-tag"; tag.style.display = "block"; tag.innerHTML = item.tag;
+      var t = document.createElement("span"); t.className = "point-title"; t.style.display = "block"; t.innerHTML = item.title;
+      var d = document.createElement("span"); d.className = "point-desc"; d.style.display = "block"; d.innerHTML = item.desc;
+      body.appendChild(tag); body.appendChild(t); body.appendChild(d);
+
+      var go = document.createElement("span");
+      go.className = "point-go"; go.textContent = "\u2192"; go.setAttribute("aria-hidden", "true");
+
+      a.appendChild(ico); a.appendChild(body); a.appendChild(go);
+      a.addEventListener("click", function () {
+        track(isInternal ? "program_switched" : "starting_point_clicked", { point: item.id, destination: item.url });
+      });
+      li.appendChild(a); host.appendChild(li);
     });
   }
 
@@ -1083,7 +1102,7 @@ a { color: inherit; }
       fallback = $("regFallback"), lastFocus = null, frameTimer = null, frameLoaded = false;
 
   function openRegistration() {
-    var url = withParams(CFG.cta.url);
+    var url = outbound(CFG.cta.url, "registration-modal");
     lastFocus = document.activeElement;
     $("regNewTab").href = url;
     $("regFallbackLink").href = url;
@@ -1202,40 +1221,16 @@ a { color: inherit; }
     });
   }
 
-  function openConcierge(starter) {
-    primeContext().then(function () {
-      var w = window.AISeller;
-      if (!w) {
-        // Widget unavailable — the page still works; point at the docs instead.
-        window.open("https://www.testmuai.com/support/docs/", "_blank", "noopener");
-        return;
-      }
-      try {
-        if (typeof w.open === "function") w.open();
-        else if (typeof w.openWidget === "function") w.openWidget();
-        else if (typeof w.show === "function") w.show();
-      } catch (e) {}
-      if (starter) {
-        try {
-          if (typeof w.sendMessage === "function") w.sendMessage(starter);
-          else if (typeof w.send === "function") w.send(starter);
-        } catch (e) {}
-      }
-    });
-  }
-
   /* ==========================================================================
      7. BOOT
      ========================================================================== */
 
+  attributeChrome();
   renderHero();
-  renderConcierge();
-  renderResources();
+  renderPoints();
   renderFaqs();
   $("year").textContent = new Date().getFullYear();
-  document.title = (MATCH.key === "_default")
-    ? "TestMu AI — Events"
-    : "TestMu AI — " + CFG.concierge.title;
+  document.title = CFG.docTitle || "TestMu AI — Events";
 
   track("page_loaded", { referrer_present: !!document.referrer });
   track("campaign_resolved", { resolution: MATCH.reason });
