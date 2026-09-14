@@ -417,7 +417,7 @@ a { color: inherit; }
   border-radius: var(--radius);
   font-family: var(--mono); font-size: 11px; letter-spacing: .02em;
   box-shadow: 0 10px 28px rgba(19,19,19,.28);
-  max-width: min(74vw, 520px);
+  max-width: min(78vw, 600px);
   transition: opacity .18s ease;
 }
 .demo-bar[hidden] { display: none; }
@@ -1298,8 +1298,11 @@ a { color: inherit; }
     if (d.visitor_role)     bits.push(d.visitor_role);
     if (d.visitor_industry) bits.push(d.visitor_industry);
     var who = bits.length ? bits.join('<span class="demo-sep">&middot;</span>') : "no persona";
+    /* `testmuconf-2027` is the canonical program key but reads as noise in a
+       12-character label, so the shared prefix is dropped for display only. */
+    var prog = (d.event_program || "explore").replace(/^testmu-?/, "");
     return {
-      html: who + '<span class="demo-sep">|</span>' + (d.event_program || "explore"),
+      html: who + '<span class="demo-sep">|</span>' + prog,
       anon: !bits.length
     };
   }
