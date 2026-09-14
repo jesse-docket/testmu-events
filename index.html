@@ -403,6 +403,69 @@ a { color: inherit; }
   .btn-coral, .btn-outline-cream { width: 100%; }
 }
 
+/* ================= DEMO SESSION BAR =================
+   Left-corner control used when running the concierge live: it shows which
+   campaign identity the current link is carrying, and wipes every first-party
+   trace of the visit so the next link opens as a genuinely new person.
+   Hidden entirely with ?demo=off. */
+.demo-bar {
+  position: fixed; left: 16px; bottom: 16px; z-index: 90;
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 8px 7px 12px;
+  background: var(--ink); color: var(--paper);
+  border: 1px solid rgba(235,233,224,.18);
+  border-radius: var(--radius);
+  font-family: var(--mono); font-size: 11px; letter-spacing: .02em;
+  box-shadow: 0 10px 28px rgba(19,19,19,.28);
+  max-width: min(74vw, 520px);
+  transition: opacity .18s ease;
+}
+.demo-bar[hidden] { display: none; }
+.demo-bar.is-busy { opacity: .55; pointer-events: none; }
+.demo-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--coral); flex: 0 0 auto;
+}
+.demo-dot.is-anon { background: rgba(235,233,224,.42); }
+.demo-state {
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  color: rgba(235,233,224,.86);
+}
+.demo-state b { color: var(--paper); font-weight: 600; }
+.demo-sep { color: rgba(235,233,224,.35); padding: 0 5px; }
+.demo-btn {
+  font: inherit; letter-spacing: .04em; text-transform: uppercase;
+  cursor: pointer; white-space: nowrap;
+  padding: 6px 10px; border-radius: var(--radius);
+  border: 1px solid transparent; background: var(--coral); color: #FFFFFF;
+  flex: 0 0 auto;
+}
+.demo-btn:hover { background: var(--coral-2); }
+.demo-btn-ghost {
+  background: transparent; color: rgba(235,233,224,.72);
+  border-color: rgba(235,233,224,.26);
+}
+.demo-btn-ghost:hover { color: var(--paper); border-color: rgba(235,233,224,.55); }
+.demo-btn:focus-visible, .demo-close:focus-visible { outline: 2px solid var(--cream); outline-offset: 2px; }
+.demo-close {
+  font: inherit; cursor: pointer; background: none; border: 0;
+  color: rgba(235,233,224,.45); padding: 4px 4px 4px 0; line-height: 1;
+  flex: 0 0 auto;
+}
+.demo-close:hover { color: var(--paper); }
+.demo-toast {
+  position: fixed; left: 16px; bottom: 62px; z-index: 91;
+  background: var(--cream); color: var(--ink);
+  border: 1px solid rgba(19,19,19,.18); border-radius: var(--radius);
+  font-family: var(--mono); font-size: 11px; line-height: 1.5;
+  padding: 9px 12px; max-width: min(74vw, 420px);
+  box-shadow: 0 10px 28px rgba(19,19,19,.22);
+}
+@media (max-width: 720px) {
+  .demo-bar { left: 10px; right: 10px; bottom: 10px; max-width: none; font-size: 10px; }
+  .demo-toast { left: 10px; right: 10px; bottom: 58px; max-width: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
@@ -412,6 +475,17 @@ a { color: inherit; }
 <body>
 
 <a class="skip" href="#main">Skip to content</a>
+
+<!-- ===================== DEMO SESSION BAR ===================== -->
+<div class="demo-bar" id="demoBar" hidden role="region" aria-label="Demo session control">
+  <span class="demo-dot" id="demoDot" aria-hidden="true"></span>
+  <span class="demo-state" id="demoState">Session&nbsp;&mdash;</span>
+  <button class="demo-btn" id="demoReset" type="button"
+          title="Clear cookies, storage and the agent session, then reload this same link as a brand-new visitor">Reset session</button>
+  <button class="demo-btn demo-btn-ghost" id="demoClean" type="button"
+          title="Reset and also drop every campaign parameter, for the no-context baseline">Clean</button>
+  <button class="demo-close" id="demoHide" type="button" aria-label="Hide the demo control for this visit">&times;</button>
+</div>
 
 <!-- ===================== HEADER ===================== -->
 <header class="masthead">
@@ -1105,6 +1179,166 @@ a { color: inherit; }
   }
 
   /* ==========================================================================
+     5b. DEMO SESSION CONTROL
+     Every trace the concierge leaves on this origin is first-party and
+     script-writable, so a reset from the page is a real reset, not a cosmetic
+     one: the Docket widget re-mints __aiseller_client_id, widget_auth_token
+     and the _docket_id cookie on the next load, which is what makes the agent
+     treat the visit as a first one. Reset keeps the current link intact so the
+     same persona can be replayed; Clean drops every parameter for the
+     no-context baseline.
+     ========================================================================== */
+
+  var DEMO_FLAG = "__testmu_demo_reset";
+
+  function clearCookies() {
+    var names = document.cookie.split(";").map(function (c) {
+      return c.split("=")[0].trim();
+    }).filter(Boolean);
+    var host = location.hostname.split(".");
+    var dir  = location.pathname.replace(/[^/]*$/, "");
+    var paths = ["/", dir, location.pathname];
+    names.forEach(function (n) {
+      for (var i = 0; i < host.length; i++) {
+        var d = host.slice(i).join(".");
+        paths.forEach(function (pth) {
+          var base = encodeURIComponent(n) + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=" + pth;
+          document.cookie = base;
+          document.cookie = base + ";domain=" + d;
+          document.cookie = base + ";domain=." + d;
+        });
+      }
+    });
+    return names.length;
+  }
+
+  function clearStorage() {
+    var n = 0;
+    try { n += localStorage.length; localStorage.clear(); } catch (e) {}
+    try { n += sessionStorage.length; sessionStorage.clear(); } catch (e) {}
+    return n;
+  }
+
+  function clearIndexedDb() {
+    if (!window.indexedDB || typeof indexedDB.databases !== "function") {
+      return Promise.resolve(0);
+    }
+    return indexedDB.databases().then(function (list) {
+      (list || []).forEach(function (db) {
+        if (db && db.name) { try { indexedDB.deleteDatabase(db.name); } catch (e) {} }
+      });
+      return (list || []).length;
+    })["catch"](function () { return 0; });
+  }
+
+  function clearCaches() {
+    if (typeof caches === "undefined" || !caches.keys) return Promise.resolve(0);
+    return caches.keys().then(function (keys) {
+      return Promise.all(keys.map(function (k) { return caches["delete"](k); }))
+        .then(function () { return keys.length; });
+    })["catch"](function () { return 0; });
+  }
+
+  function closeAgentSession() {
+    var w = window.AISeller;
+    if (!w) return;
+    try { if (typeof w.resetContext === "function") w.resetContext(); } catch (e) {}
+    try { if (typeof w.hideAndDisconnect === "function") w.hideAndDisconnect(); } catch (e) {}
+  }
+
+  /* window.name survives a same-origin reload, so it both carries the "it
+     worked" receipt across the reload and is itself a tracking surface worth
+     wiping on the way through. */
+  function resetSession(keepParams) {
+    var bar = $("demoBar");
+    if (bar) bar.classList.add("is-busy");
+    closeAgentSession();
+    var cookies = clearCookies();
+    var stores  = clearStorage();
+    track("demo_session_reset", { keep_params: !!keepParams });
+
+    return Promise.all([clearIndexedDb(), clearCaches()]).then(function (r) {
+      var receipt = {
+        cookies: cookies, stores: stores, dbs: r[0], caches: r[1],
+        params: !!keepParams
+      };
+      try { window.name = DEMO_FLAG + ":" + JSON.stringify(receipt); } catch (e) { window.name = DEMO_FLAG; }
+      var target = keepParams
+        ? location.pathname + location.search
+        : location.pathname;
+      location.replace(target);
+    });
+  }
+
+  function readResetReceipt() {
+    var n = "";
+    try { n = window.name || ""; } catch (e) { return null; }
+    if (n.indexOf(DEMO_FLAG) !== 0) return null;
+    try { window.name = ""; } catch (e) {}
+    var raw = n.slice(DEMO_FLAG.length + 1);
+    try { return JSON.parse(raw); } catch (e) { return {}; }
+  }
+
+  function demoToast(msg, ms) {
+    var el = document.createElement("div");
+    el.className = "demo-toast";
+    el.setAttribute("role", "status");
+    el.innerHTML = msg;
+    document.body.appendChild(el);
+    setTimeout(function () {
+      el.style.opacity = "0";
+      setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 260);
+    }, ms || 4200);
+  }
+
+  function identityLabel() {
+    var d = dciEnvelope();
+    var bits = [];
+    if (d.visitor_name)     bits.push("<b>" + d.visitor_name + "</b>");
+    if (d.visitor_role)     bits.push(d.visitor_role);
+    if (d.visitor_industry) bits.push(d.visitor_industry);
+    var who = bits.length ? bits.join('<span class="demo-sep">&middot;</span>') : "no persona";
+    return {
+      html: who + '<span class="demo-sep">|</span>' + (d.event_program || "explore"),
+      anon: !bits.length
+    };
+  }
+
+  function mountDemoBar() {
+    var demoOff = false;
+    try {
+      var dq = (new URLSearchParams(location.search).get("demo") || "").toLowerCase();
+      demoOff = (dq === "off" || dq === "0" || dq === "false");
+    } catch (e) {}
+    if (demoOff) return;
+    var bar = $("demoBar");
+    if (!bar) return;
+    bar.hidden = false;
+
+    var id = identityLabel();
+    $("demoState").innerHTML = id.html;
+    if (id.anon) $("demoDot").classList.add("is-anon");
+
+    $("demoReset").addEventListener("click", function () { resetSession(true); });
+    $("demoClean").addEventListener("click", function () { resetSession(false); });
+    $("demoHide").addEventListener("click", function () { bar.hidden = true; });
+
+    var receipt = readResetReceipt();
+    if (receipt) {
+      demoToast(
+        "<b>Fresh session.</b> Cleared " + (receipt.cookies || 0) + " cookie(s), " +
+        (receipt.stores || 0) + " storage key(s)" +
+        (receipt.dbs ? ", " + receipt.dbs + " database(s)" : "") +
+        (receipt.caches ? ", " + receipt.caches + " cache(s)" : "") + ".<br>" +
+        (receipt.params
+          ? "Same campaign link &mdash; the agent now sees you as a new visitor."
+          : "Parameters dropped &mdash; this is the no-context baseline."),
+        5200
+      );
+    }
+  }
+
+  /* ==========================================================================
      6. BOOT
      ========================================================================== */
 
@@ -1119,6 +1353,7 @@ a { color: inherit; }
   track("campaign_resolved", { resolution: MATCH.reason });
 
   primeContext();
+  mountDemoBar();
 
 })();
 </script>
