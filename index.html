@@ -747,7 +747,37 @@ a { color: inherit; }
      ========================================================================== */
 
   var UTM_PARAMS   = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
-  var EVENT_PARAMS = ["event_program", "event_phase", "event_topic", "event_content", "event_cta", "intent", "ctx"];
+  var EVENT_PARAMS = [
+    "event_program", "event_phase", "event_topic", "event_content", "event_cta", "intent", "ctx",
+    "visitor_name", "visitor_role", "visitor_industry"
+  ];
+
+  /* Known values for the two slug fields. Anything else is treated as absent,
+     so a typo in a campaign link degrades to the no-persona path rather than
+     handing the agent a value it has no rule for. */
+  var ROLE_SLUGS = [
+    "qe-director", "qa-manager", "eng-manager", "devops-lead", "sdet",
+    "automation-engineer", "manual-tester", "developer", "architect"
+  ];
+  var INDUSTRY_SLUGS = [
+    "bfsi", "retail", "healthcare", "saas", "ai-products",
+    "media", "travel", "insurance", "public-sector", "it-services"
+  ];
+
+  function slug(v, allowed) {
+    v = (v || "").toLowerCase();
+    return allowed.indexOf(v) > -1 ? v : "";
+  }
+
+  /* A display name only: letters, spaces, hyphens and apostrophes, first token,
+     capitalised. Rejects slugs, emails and anything that looks like a company. */
+  function personName(v) {
+    v = (v || "").trim();
+    if (!v || v.length > 40 || /[@_\/0-9]/.test(v)) return "";
+    var first = v.split(/\s+/)[0];
+    if (!/^[A-Za-z][A-Za-z'-]{1,19}$/.test(first)) return "";
+    return first.charAt(0).toUpperCase() + first.slice(1).toLowerCase();
+  }
   var PUBLIC_PARAMS = UTM_PARAMS.concat(EVENT_PARAMS);
 
   /* Docket attribution. Every outbound TestMu link carries these so the
@@ -1042,7 +1072,10 @@ a { color: inherit; }
       event_faq_set:   CFG.faqSet,
       campaign_source: PARAMS.utm_source || "direct",
       campaign_cta:    PARAMS.event_cta || CTA_ID[CFG.phase] || "explore",
-      visitor_intent:  PARAMS.intent || "unknown"
+      visitor_intent:  PARAMS.intent || "unknown",
+      visitor_name:     personName(PARAMS.visitor_name),
+      visitor_role:     slug(PARAMS.visitor_role, ROLE_SLUGS),
+      visitor_industry: slug(PARAMS.visitor_industry, INDUSTRY_SLUGS)
     };
   }
 
